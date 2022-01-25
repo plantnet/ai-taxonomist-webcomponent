@@ -48,7 +48,10 @@ export class AiTaxonomist extends LitElement {
             form.append('image', this.imageFiles[i])
         }
 
-        fetch(this.serverUrl, {
+        const url = new URL(this.serverUrl)
+        url.pathname = '/v2/identify/all'
+
+        fetch(url.toString(), {
             method: 'POST',
             body: form,
         })

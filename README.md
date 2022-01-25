@@ -10,12 +10,17 @@ npm i ai-taxonomist
 
 ## Usage
 
+1. Setup server: 
+    This part is necessary to use the webcomponent on PlantNet API but you usage may vary if you host your own API.    
+    - Build the nginx docker image: `docker build -t nginx-ai-taxo -f Dockerfile --build-arg APIKEY=XXXX .`  Don't forget to get your API key on [PlantNet API](https://my.plantnet.org/).
+    - Run the nginx docker image: `docker run -it -d -p 3000:80 nginx-ai-taxo`
+2. Import and use the Web Components
 ```html
 <script type="module">
   import 'ai-taxonomist/ai-taxonomist.js';
 </script>
 
-<ai-taxonomist></ai-taxonomist>
+<ai-taxonomist serverUrl="http://localhost:3000"></ai-taxonomist>
 ```
 
 ## Linting and formatting
