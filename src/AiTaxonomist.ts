@@ -2,8 +2,11 @@ import {html, css, LitElement} from 'lit'
 import {property} from 'lit/decorators.js'
 import './image-picker.js'
 import './image-selected.js'
+import './taxon-results.js'
 import "file-drop-element"
 import {ImagePickEvent} from './ImagePicker'
+import {ResultType} from './TaxonResults'
+import {identifyRequest} from './utils/identifyRequest'
 
 enum LoadingState {
     Idle,
@@ -41,7 +44,7 @@ export class AiTaxonomist extends LitElement {
     identify = {...INIT_IDENTIFY_STATE}
 
 
-    __onImagePick(e: ImagePickEvent) {
+    async __onImagePick(e: ImagePickEvent) {
         if(this.identify.loading === LoadingState.Loading) {
             console.warn('Already loading')
             return
@@ -50,32 +53,16 @@ export class AiTaxonomist extends LitElement {
         this.imageFiles = e.detail.files
         this.identify.loading = LoadingState.Loading
 
-        const form = new FormData();
+        const response = await identifyRequest(this.imageFiles, this.serverUrl)
 
-        for(let i = 0; i < this.imageFiles.length; i++) {
-            form.append('organs', 'auto');
-            form.append('images', this.imageFiles[i])
+        console.log(response)
+        if(typeof response === "string") {
+            this.identify.loading = LoadingState.Error
+        } else {
+            this.identify.loading = LoadingState.Loaded
+            this.identify.results = response
         }
-
-        const url = new URL(this.serverUrl)
-        url.pathname = '/v2/identify/all'
-
-        fetch(url.toString(), {
-            method: 'POST',
-            body: form,
-        })
-            .then(response => response.json())
-            .then(json => {
-                console.log(json)
-                this.identify.text = json.text
-                this.identify.loading = LoadingState.Loaded
-                this.requestUpdate()
-            })
-            .catch(error => {
-                console.error(error)
-                this.identify.loading = LoadingState.Error
-                this.requestUpdate()
-            })
+        this.requestUpdate()
     }
 
     __addImages(e: ImagePickEvent) {
@@ -106,24 +93,20 @@ export class AiTaxonomist extends LitElement {
                     <image-picker @imagepick=${this.__onImagePick} ></image-picker>
                 `
             case LoadingState.Loading:
-                return html`
-                    <div>Loading...</div>
-                `
+            case LoadingState.Error:
             case LoadingState.Loaded:
+                const body = this.identify.error ? html`<p>Error: ${this.identify.error}</p>` : html`<taxon-results .results=${this.identify.results} />`
+
                 return html`
                     <image-selected .images=${this.imageFiles}
                                     .canAddImages=${this.imageFiles.length < this.maxImages}
                                     @addimage=${this.__addImages}
                                     @removeimage=${this.__removeImage}>
                     ></image-selected>
-                    <div>${this.identify.text}</div>
-                `
-            case LoadingState.Error:
-                return html`
-                    <div>Error</div>
+                    ${body}
+                    <button @press="${this.reset()}">Reset</button>
                 `
         }
-
     }
 
     reset() {
