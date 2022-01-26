@@ -45,7 +45,7 @@ export class AiTaxonomist extends LitElement {
 
         for(let i = 0; i < this.imageFiles.length; i++) {
             form.append('organs', 'auto');
-            form.append('image', this.imageFiles[i])
+            form.append('images', this.imageFiles[i])
         }
 
         const url = new URL(this.serverUrl)
