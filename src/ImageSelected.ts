@@ -14,8 +14,22 @@ export class ImageSelected extends LitElement {
         align-items: center;
     }
 
+    .col {
+        flex: 1 0 0;
+        max-width: 100%;
+        box-sizing: border-box;
+        flex-basis: 0;
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+    }
+
+    .blankSpaceLeft {
+        flex-basis: 16.66666667%;
+        max-width: 16.66666667%;
+    }
+
     p {
-        padding: 12px;
+        padding: 0.2rem 1rem 0.2rem 0.2rem;
     }
 
     .imgContainer {
@@ -87,6 +101,7 @@ export class ImageSelected extends LitElement {
 
         return html`
             <div class="container">
+                <div class="col blankSpaceLeft"></div>
                 <p>Original image(s)</p>
                 ${this.images.map(image => html`
                     <div class="imgContainer">

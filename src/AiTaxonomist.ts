@@ -23,13 +23,22 @@ const INIT_IDENTIFY_STATE = {
 export class AiTaxonomist extends LitElement {
     static styles = css`
     :host {
-      display: block;
-      padding: 25px;
-      color: var(--ai-taxonomist-text-color, #535559);
+        display: block;
+        padding: 25px;
+        color: var(--ai-taxonomist-text-color, #535559);
+        --ai-taxonomist-separator-border-color: #CCC;
+        font-size: 1.1rem;
+
+    }
+
+    .innerContainer {
+        max-width: 850px;
+        margin: auto;
     }
 
     @media (prefers-color-scheme: dark) {
         :host {
+            --ai-taxonomist-separator-border-color: #666;
             color: var(--ai-taxonomist-text-color, #CCC);
         }
     }
@@ -84,8 +93,7 @@ export class AiTaxonomist extends LitElement {
         }
     }
 
-    render() {
-        console.log(this.identify)
+    getInnerContent () {
         switch(this.identify.loading) {
             default:
             case LoadingState.Idle:
@@ -107,6 +115,15 @@ export class AiTaxonomist extends LitElement {
                     <button @press="${this.reset()}">Reset</button>
                 `
         }
+    }
+
+    render() {
+        console.log(this.identify)
+        return html`
+            <div class="innerContainer">
+                ${this.getInnerContent()}
+                </div>
+        `
     }
 
     reset() {

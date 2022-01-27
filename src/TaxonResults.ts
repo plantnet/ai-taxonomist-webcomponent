@@ -26,10 +26,41 @@ export class TaxonResults extends LitElement {
         flex-direction: column;
     }
 
-    p {
+    .title {
         flex: 1;
         font-weight: normal;
+        display: block;
+        overflow: hidden;
+        white-space: nowrap;
     }
+
+    .title  > span {
+        position: relative;
+        display: inline-block;
+        margin-left: calc(16.6667% + 0.2rem);
+
+    }
+
+    .title > span:before,
+    .title > span:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 9999px;
+        height: 1.5px;
+        background: var(--ai-taxonomist-separator-border-color);
+    }
+
+    .title > span:before {
+        right: 100%;
+        margin-right: 10px;
+    }
+
+    .title > span:after {
+        left: 100%;
+        margin-left: 10px;
+    }
+
 
     ul {
         list-style: none;
@@ -57,6 +88,10 @@ export class TaxonResults extends LitElement {
         flex-basis: 0;
     }
 
+    .col-text {
+        padding-top: 1.6rem;
+    }
+
     .score {
         padding-right: 0.5rem;
         padding-left: 0.5rem;
@@ -66,14 +101,17 @@ export class TaxonResults extends LitElement {
 
     .score div {
         border-radius: 20px;
-        border: 1.5px solid #CCC;
+        border: 1.5px solid var(--ai-taxonomist-separator-border-color);
         padding: 0.5rem;
         text-align: center;
+        max-width: 4rem;
     }
 
     .species {
         flex-basis: 25%;
         max-width: 25%;
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
     }
     .species p {
         margin: 0;
@@ -90,18 +128,31 @@ export class TaxonResults extends LitElement {
     .family {
         flex-basis: 16.66666667%;
         max-width: 16.66666667%;
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
     }
 
     .family span{
+        text-align: left;
         font-style: italic;
-        background-color: #CCC;
+        background-color: var(--ai-taxonomist-separator-border-color);
         border-radius: 4px;
         padding: 0.2rem 0.35rem;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        display: block;
     }
 
     .imgContainer {
         flex-basis: 41.66666667%;
         max-width: 41.66666667%;
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+        display: inline-flex;
+        justify-content: flex-end;
+        gap: 6px;
+        margin-bottom: 6px;
     }
 
     .imgContainer img{
@@ -113,14 +164,41 @@ export class TaxonResults extends LitElement {
         border-radius: 4px;
     }
 
-    @media (prefers-color-scheme: dark) {
-        .score div {
-            border-color: #666;
+    @media only screen and (max-width: 48em) {
+
+        .col-text {
+            padding-top: 0;
         }
 
-        .family span {
-            background-color: #666;
+        .score {
+            flex-basis: 10%;
+            max-width: 10%;
         }
+
+        .species {
+            flex-basis: 60%;
+            max-width: 60%;
+        }
+
+        .family {
+            flex-basis: 30%;
+            max-width: 30%;
+            text-align: end;
+        }
+        .family span{
+            display: inline-block;
+        }
+
+        .imgContainer {
+            flex-basis: 100%;
+            max-width: 100%;
+            justify-content: flex-start;
+            margin-top: 12px;
+            margin-bottom: 24px;
+        }
+    }
+
+    @media (prefers-color-scheme: dark) {
     }
     `
 
@@ -130,23 +208,23 @@ export class TaxonResults extends LitElement {
         return html`
             <div class="container">
 
-                <p>Results</p>
+                <p class="title"><span>Results</span></p>
                 <ul>
                     ${this.results.map(result => html`
                         <li class="result">
-                            <div class="col score">
+                            <div class="col col-text score">
                                 <div>${round(result.score * 100)}%</div>
                             </div>
-                            <div class="col species">
+                            <div class="col col-text species">
                                 <p class="speciesName">${result.speciesName} <span>${result.author}</span></p>
                                 <p>${result.commonNames[0]}</p>
                             </div>
-                            <div class="col family">
+                            <div class="col col-text family">
                                 <span>${result.family}</span>
                             </div>
                             <div class="col imgContainer">
                                 ${result.images.map(image => html`
-                                    <img src="${image.url}" alt="${image.alt}">
+                                    <img src="${image.url}" alt="${image.alt}" title="${image.alt}">
                                 `)}
                             </div>
                         </li>
