@@ -3,12 +3,13 @@ import {property} from 'lit/decorators.js'
 import './image-picker.js'
 import './image-selected.js'
 import './taxon-results.js'
+import './components/ai-reset-button.js'
 import "file-drop-element"
 import {ImagePickEvent} from './ImagePicker'
 import {ResultType} from './TaxonResults'
 import {identifyRequest} from './utils/identifyRequest'
 
-enum LoadingState {
+enum IdentifyState {
     Idle,
     Loading,
     Loaded,
@@ -16,11 +17,11 @@ enum LoadingState {
 }
 
 const INIT_IDENTIFY_STATE: {
-    loading: LoadingState,
+    state: IdentifyState,
     error: string | null,
     results: ResultType[],
 } = {
-    loading: LoadingState.Idle,
+    state: IdentifyState.Idle,
     error: null,
     results: []
 }
@@ -130,36 +131,36 @@ export class AiTaxonomist extends LitElement {
     }
 
     async runIdentify() {
-        if(this.identify.loading === LoadingState.Loading) {
+        if(this.identify.state === IdentifyState.Loading) {
             console.warn('Already loading')
             return
         }
 
-        this.identify.loading = LoadingState.Loading
+        this.identify.state = IdentifyState.Loading
 
         const response = await identifyRequest(this.imageFiles, this.serverUrl)
 
         console.log(response)
         if(typeof response === "string") {
-            this.identify.loading = LoadingState.Error
+            this.identify.state = IdentifyState.Error
         } else {
-            this.identify.loading = LoadingState.Loaded
+            this.identify.state = IdentifyState.Loaded
             this.identify.results = response
         }
         this.requestUpdate()
     }
 
     getInnerContent () {
-        switch(this.identify.loading) {
+        switch(this.identify.state) {
             default:
-            case LoadingState.Idle:
+            case IdentifyState.Idle:
                 return html`
                     <image-picker @imagepick=${this.__onImagePick} ></image-picker>
                 `
-            case LoadingState.Loading:
-            case LoadingState.Error:
-            case LoadingState.Loaded:
-                const body = this.identify.error ? html`<p>Error: ${this.identify.error}</p>` : html`<taxon-results .results=${this.identify.results} ?loading=${this.identify.loading === LoadingState.Loading}/>`
+            case IdentifyState.Loading:
+            case IdentifyState.Error:
+            case IdentifyState.Loaded:
+                const body = this.identify.error ? html`<p>Error: ${this.identify.error}</p>` : html`<taxon-results .results=${this.identify.results} ?loading=${this.identify.state === IdentifyState.Loading}/>`
 
                 return html`
                     <image-selected .images=${this.imageFiles}
@@ -168,7 +169,7 @@ export class AiTaxonomist extends LitElement {
                                     @removeimage=${this.__removeImage}>
                     ></image-selected>
                     ${body}
-                    <button @click=${this.reset}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#535559"><path d="M12,4C14.1,4 16.1,4.8 17.6,6.3C20.7,9.4 20.7,14.5 17.6,17.6C15.8,19.5 13.3,20.2 10.9,19.9L11.4,17.9C13.1,18.1 14.9,17.5 16.2,16.2C18.5,13.9 18.5,10.1 16.2,7.7C15.1,6.6 13.5,6 12,6V10.6L7,5.6L12,0.6V4M6.3,17.6C3.7,15 3.3,11 5.1,7.9L6.6,9.4C5.5,11.6 5.9,14.4 7.8,16.2C8.3,16.7 8.9,17.1 9.6,17.4L9,19.4C8,19 7.1,18.4 6.3,17.6Z" /></svg>New identification</button>
+                    <ai-button-reset @click=${this.reset}>New identification</ai-button-reset>
                 `
         }
     }

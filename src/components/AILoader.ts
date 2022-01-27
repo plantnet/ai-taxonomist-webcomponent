@@ -10,7 +10,7 @@ export class AILoader extends LitElement {
         position: relative;
         width: 80px;
         height: 80px;
-        animation: fadein 2s;
+        animation: fadeIn 2s;
     }
     .loader div {
         position: absolute;
@@ -37,7 +37,7 @@ export class AILoader extends LitElement {
         left: 56px;
         animation: loader3 0.6s infinite;
     }
-    @keyframes fadein {
+    @keyframes fadeIn {
         from {
             opacity:0;
         }

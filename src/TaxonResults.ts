@@ -1,7 +1,7 @@
 import {html, css, LitElement} from 'lit'
 import {property} from 'lit/decorators.js'
 import {round} from './utils/round'
-import './ai-loader.js'
+import './components/ai-loader.js'
 
 export type ResultType = {
     score: number,
@@ -25,6 +25,7 @@ export class TaxonResults extends LitElement {
     .container {
         display: flex;
         flex-direction: column;
+        animation: fadeIn 0.5s ease-in-out;
     }
 
     .title {
@@ -82,7 +83,21 @@ export class TaxonResults extends LitElement {
         flex-wrap: wrap;
         margin-right: -0.5rem;
         margin-left: -0.5rem;
+        opacity: 0;
+        transform: translateY(-20px);
+        animation: animateIn 0.3s forwards;
+        animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
     }
+
+    .result:nth-child(1) { animation-delay: .05s }
+    .result:nth-child(2) { animation-delay: .1s }
+    .result:nth-child(3) { animation-delay: .15s }
+    .result:nth-child(4) { animation-delay: .2s }
+    .result:nth-child(5) { animation-delay: .25s }
+    .result:nth-child(6) { animation-delay: .3s }
+    .result:nth-child(7) { animation-delay: .35s }
+    .result:nth-child(8) { animation-delay: .4s }
+    .result:nth-child(9) { animation-delay: .45s }
 
     .col {
         flex: 1 0 0;
@@ -168,7 +183,6 @@ export class TaxonResults extends LitElement {
     }
 
     @media only screen and (max-width: 48em) {
-
         .col-text {
             padding-top: 0;
         }
@@ -200,6 +214,21 @@ export class TaxonResults extends LitElement {
             margin-bottom: 24px;
         }
     }
+
+    @keyframes fadeIn {
+        from { opacity:0; }
+        to { opacity:1; }
+    }
+    @keyframes animateIn {
+        from {
+            opacity:0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity:1;
+            transform: translateY(0);
+        }
+    }
     `
 
     @property({attribute: false}) results: ResultType[] = []
@@ -210,7 +239,6 @@ export class TaxonResults extends LitElement {
 
         return html`
             <div class="container">
-
                 <p class="title"><span>Results</span></p>
                 ${loading}
                 <ul>
