@@ -232,17 +232,22 @@ export class TaxonResults extends LitElement {
     `
 
     @property({attribute: false}) results: ResultType[] = []
+    @property({type: Boolean}) error: string | null = null
     @property({type: Boolean}) loading: boolean = false
 
     render() {
         const loading = this.loading ? html`<ai-loader/>` : null
+        const error = this.error ? html`<p>${this.error}</p>` : null
+        const maxResults = 8
+        const hasExtraResults = this.results.length > maxResults ? html`<p>${this.results.length - maxResults} more results not displayed</p>` : null
 
         return html`
             <div class="container">
                 <p class="title"><span>Results</span></p>
                 ${loading}
+                ${error}
                 <ul>
-                    ${this.results.map(result => html`
+                    ${this.results.slice(0, maxResults).map(result => html`
                         <li class="result">
                             <div class="col col-text score">
                                 <div>${round(result.score * 100)}%</div>
@@ -262,6 +267,7 @@ export class TaxonResults extends LitElement {
                         </li>
                     `)}
                 </ul>
+                ${hasExtraResults}
             </div>
         `
     }

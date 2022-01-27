@@ -1,5 +1,11 @@
-export type IdentifyResponse = {
+export type IdentifySuccessResponse = {
     results: Result[]
+}
+
+export type IdentifyErrorResponse = {
+    statusCode: number
+    error: string
+    message: string
 }
 
 export type Result = {

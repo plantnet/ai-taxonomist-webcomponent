@@ -86,7 +86,6 @@ export class AiTaxonomist extends LitElement {
   `
 
     @property({type: Array}) imageFiles: File[] = []
-
     @property({type: String}) serverUrl = 'http://localhost:3000'
     @property({type: Number}) maxImages = 5
 
@@ -122,7 +121,6 @@ export class AiTaxonomist extends LitElement {
     }
 
     render() {
-        console.log(this.identify)
         return html`
             <div class="innerContainer">
                 ${this.getInnerContent()}
@@ -136,13 +134,14 @@ export class AiTaxonomist extends LitElement {
             return
         }
 
+        this.identify.error = null
         this.identify.state = IdentifyState.Loading
 
         const response = await identifyRequest(this.imageFiles, this.serverUrl)
 
-        console.log(response)
         if(typeof response === "string") {
             this.identify.state = IdentifyState.Error
+            this.identify.error = response
         } else {
             this.identify.state = IdentifyState.Loaded
             this.identify.results = response
@@ -160,15 +159,15 @@ export class AiTaxonomist extends LitElement {
             case IdentifyState.Loading:
             case IdentifyState.Error:
             case IdentifyState.Loaded:
-                const body = this.identify.error ? html`<p>Error: ${this.identify.error}</p>` : html`<taxon-results .results=${this.identify.results} ?loading=${this.identify.state === IdentifyState.Loading}/>`
-
                 return html`
                     <image-selected .images=${this.imageFiles}
                                     .canAddImages=${this.imageFiles.length < this.maxImages}
                                     @addimage=${this.__addImages}
                                     @removeimage=${this.__removeImage}>
                     ></image-selected>
-                    ${body}
+                    <taxon-results .results=${this.identify.results}
+                                   .error=${this.identify.error}
+                                   ?loading=${this.identify.state === IdentifyState.Loading}></taxon-results>
                     <ai-button-reset @click=${this.reset}>New identification</ai-button-reset>
                 `
         }

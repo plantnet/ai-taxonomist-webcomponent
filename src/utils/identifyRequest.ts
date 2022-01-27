@@ -1,4 +1,4 @@
-import {IdentifyResponse, Result} from './types'
+import {IdentifyErrorResponse, IdentifySuccessResponse, Result} from './types'
 import {ResultType} from '../TaxonResults'
 
 export const identifyRequest = async (images: File[], serverUrl: string): Promise<ResultType[] | string> => {
@@ -19,7 +19,12 @@ export const identifyRequest = async (images: File[], serverUrl: string): Promis
             body: form,
         })
 
-        const responseJson: IdentifyResponse = await response.json()
+        const responseJson: IdentifySuccessResponse | IdentifyErrorResponse = await response.json()
+
+        if('error' in responseJson ) {
+            return responseJson.message
+        }
+
 
         return responseJson.results.map((result: Result) => ({
             score: result.score,
