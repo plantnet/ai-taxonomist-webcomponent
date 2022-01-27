@@ -63,11 +63,6 @@ export class ImageSelected extends LitElement {
     .imgRemove:hover svg{
         filter: drop-shadow( 2px 2px 3px rgba(83,85,89, .7)) brightness(80%);
     }
-
-    @media (prefers-color-scheme: dark) {
-
-    }
-
     `
 
     @property({attribute: false}) images: File[] = []
@@ -108,7 +103,7 @@ export class ImageSelected extends LitElement {
                         <img width="400" src="${URL.createObjectURL(image)}" alt="">
                         <button class="imgRemove" @click="${this.__onImageRemove(image)}">
                             <svg xmlns="http://www.w3.org/2000/svg"
-                                 version="1.1" width="24" height="24" viewBox="0 0 24 24" fill="#FFF">
+                                 width="24" height="24" viewBox="0 0 24 24" fill="#FFF">
                                 <path
                                     d="M17,13H7V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/>
                             </svg>

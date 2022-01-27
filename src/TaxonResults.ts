@@ -197,9 +197,6 @@ export class TaxonResults extends LitElement {
             margin-bottom: 24px;
         }
     }
-
-    @media (prefers-color-scheme: dark) {
-    }
     `
 
     @property({attribute: false}) results: ResultType[] = []
