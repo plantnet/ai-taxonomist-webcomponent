@@ -1,6 +1,7 @@
 import {html, css, LitElement} from 'lit'
 import {property} from 'lit/decorators.js'
 import {round} from './utils/round'
+import './ai-loader.js'
 
 export type ResultType = {
     score: number,
@@ -38,7 +39,6 @@ export class TaxonResults extends LitElement {
         position: relative;
         display: inline-block;
         margin-left: calc(16.6667% + 0.2rem);
-
     }
 
     .title > span:before,
@@ -61,6 +61,9 @@ export class TaxonResults extends LitElement {
         margin-left: 10px;
     }
 
+    ai-loader {
+        margin-left: calc(16.6667%);
+    }
 
     ul {
         list-style: none;
@@ -118,7 +121,7 @@ export class TaxonResults extends LitElement {
     }
 
     .speciesName {
-        color: #8EB533;
+        color: var(--ai-taxonomist-accent-color);
         font-style: italic;
     }
     .speciesName span{
@@ -200,12 +203,16 @@ export class TaxonResults extends LitElement {
     `
 
     @property({attribute: false}) results: ResultType[] = []
+    @property({type: Boolean}) loading: boolean = false
 
     render() {
+        const loading = this.loading ? html`<ai-loader/>` : null
+
         return html`
             <div class="container">
 
                 <p class="title"><span>Results</span></p>
+                ${loading}
                 <ul>
                     ${this.results.map(result => html`
                         <li class="result">

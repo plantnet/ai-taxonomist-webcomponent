@@ -32,6 +32,7 @@ export class AiTaxonomist extends LitElement {
         padding: 25px;
         color: var(--ai-taxonomist-text-color, #535559);
         --ai-taxonomist-separator-border-color: #CCC;
+        --ai-taxonomist-accent-color: #8EB533;
         font-size: 1.1rem;
 
     }
@@ -158,7 +159,7 @@ export class AiTaxonomist extends LitElement {
             case LoadingState.Loading:
             case LoadingState.Error:
             case LoadingState.Loaded:
-                const body = this.identify.error ? html`<p>Error: ${this.identify.error}</p>` : html`<taxon-results .results=${this.identify.results} />`
+                const body = this.identify.error ? html`<p>Error: ${this.identify.error}</p>` : html`<taxon-results .results=${this.identify.results} ?loading=${this.identify.loading === LoadingState.Loading}/>`
 
                 return html`
                     <image-selected .images=${this.imageFiles}
