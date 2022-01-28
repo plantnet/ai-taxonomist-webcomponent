@@ -1,17 +1,17 @@
-import {IdentifyErrorResponse, IdentifySuccessResponse, Result} from './types'
-import {ResultType} from '../TaxonResults'
+import { IdentifyErrorResponse, IdentifySuccessResponse, Result } from './types.js'
+import { ResultType } from '../TaxonResults.js'
 
 export const identifyRequest = async (images: File[], serverUrl: string): Promise<ResultType[] | string> => {
     const form = new FormData()
 
-    for (let i = 0; i < images.length; i++) {
+    for (let i = 0; i < images.length; i += 1) {
         form.append('organs', 'auto')
         form.append('images', images[i])
     }
 
     const url = new URL(serverUrl)
     url.pathname = '/v2/identify/all'
-    url.searchParams.append("include-related-images", "true")
+    url.searchParams.append('include-related-images', 'true')
 
     try {
         const response = await fetch(url.toString(), {
@@ -21,10 +21,9 @@ export const identifyRequest = async (images: File[], serverUrl: string): Promis
 
         const responseJson: IdentifySuccessResponse | IdentifyErrorResponse = await response.json()
 
-        if('error' in responseJson ) {
+        if ('error' in responseJson) {
             return responseJson.message
         }
-
 
         return responseJson.results.map((result: Result) => ({
             score: result.score,
@@ -32,14 +31,14 @@ export const identifyRequest = async (images: File[], serverUrl: string): Promis
             author: result.species.scientificNameAuthorship,
             family: result.species.family.scientificName,
             commonNames: result.species.commonNames,
-            images: result.images.map(image => ({
-                url: image.url.o,
-                alt: `${image.citation} - ${image.date.string}`
-            })).slice(0, 3),
+            images: result.images
+                .map(image => ({
+                    url: image.url.o,
+                    alt: `${image.citation} - ${image.date.string}`,
+                }))
+                .slice(0, 3),
         }))
-
     } catch (error: any) {
-        console.error(error)
         return `Error: ${error.message}`
     }
 }

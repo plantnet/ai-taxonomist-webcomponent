@@ -1,3 +1,3 @@
-import { ImageSelected } from './ImageSelected.js';
+import { ImageSelected } from './ImageSelected.js'
 
-window.customElements.define('image-selected', ImageSelected);
+window.customElements.define('image-selected', ImageSelected)

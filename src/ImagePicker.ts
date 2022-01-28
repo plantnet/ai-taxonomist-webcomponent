@@ -1,5 +1,8 @@
 import { html, css, LitElement } from 'lit'
-import 'file-drop-element'
+// prettier-ignore
+// eslint-disable-next-line
+import "file-drop-element"
+// eslint-disable-next-line
 import { FileDropEvent } from 'file-drop-element'
 import { property } from 'lit/decorators.js'
 
@@ -48,16 +51,13 @@ export class ImagePicker extends LitElement {
         }
 
         @media (prefers-color-scheme: dark) {
-            label {
+            file-drop label {
+                outline-color: #888;
                 background-color: #666;
             }
 
-            label:hover {
+            file-drop label:hover {
                 background-color: #333;
-            }
-
-            file-drop label {
-                outline-color: #888;
             }
 
             file-drop.inline label svg {
@@ -94,7 +94,7 @@ export class ImagePicker extends LitElement {
     }
 
     render() {
-        const accept = SUPPORTED_IMAGE_FILE_TYPES.join(', ') + ', .png, .jpg, .jpeg, .JPG, .JPEG'
+        const accept = `${SUPPORTED_IMAGE_FILE_TYPES.join(', ')}, .png, .jpg, .jpeg, .JPG, .JPEG`
         const fileDropClass = this.inlineMode ? 'inline' : ''
 
         const labelContent = this.inlineMode

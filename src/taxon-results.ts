@@ -1,3 +1,3 @@
-import { TaxonResults } from './TaxonResults.js';
+import { TaxonResults } from './TaxonResults.js'
 
-window.customElements.define('taxon-results', TaxonResults);
+window.customElements.define('taxon-results', TaxonResults)
