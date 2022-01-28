@@ -29,7 +29,6 @@ export class AiTaxonomist extends LitElement {
     static styles = css`
         :host {
             display: block;
-            padding: 25px;
             color: var(--ai-taxonomist-text-color, #535559);
             --ai-taxonomist-separator-border-color: #ccc;
             --ai-taxonomist-accent-color: #8eb533;
