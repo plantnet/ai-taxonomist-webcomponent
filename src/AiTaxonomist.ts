@@ -163,7 +163,7 @@ export class AiTaxonomist extends LitElement {
                         .error=${this.identify.error}
                         ?loading=${this.identify.state === IdentifyState.Loading}
                     ></taxon-results>
-                    <ai-button-reset @click=${this.reset}>New identification</ai-button-reset>
+                    <ai-button-reset @press=${this.reset}>New identification</ai-button-reset>
                 `
         }
     }
