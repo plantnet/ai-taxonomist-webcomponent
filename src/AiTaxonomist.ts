@@ -29,7 +29,6 @@ export class AiTaxonomist extends LitElement {
     static styles = css`
         :host {
             display: block;
-            padding: 25px;
             color: var(--ai-taxonomist-text-color, #535559);
             --ai-taxonomist-separator-border-color: #ccc;
             --ai-taxonomist-accent-color: #8eb533;
@@ -164,7 +163,7 @@ export class AiTaxonomist extends LitElement {
                         .error=${this.identify.error}
                         ?loading=${this.identify.state === IdentifyState.Loading}
                     ></taxon-results>
-                    <ai-button-reset @click=${this.reset}>New identification</ai-button-reset>
+                    <ai-button-reset @press=${this.reset}>New identification</ai-button-reset>
                 `
         }
     }

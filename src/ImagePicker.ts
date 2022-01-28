@@ -35,8 +35,8 @@ export class ImagePicker extends LitElement {
             margin-left: 4px;
         }
         file-drop.inline label {
-            width: 100px;
-            height: 100px;
+            width: 70px;
+            height: 70px;
         }
 
         file-drop.drop-valid label,

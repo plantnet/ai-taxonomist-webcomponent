@@ -31,6 +31,7 @@ export class TaxonResults extends LitElement {
             display: block;
             overflow: hidden;
             white-space: nowrap;
+            margin-top: 12px;
         }
 
         .title > span {
@@ -203,13 +204,13 @@ export class TaxonResults extends LitElement {
             }
 
             .score {
-                flex-basis: 10%;
-                max-width: 10%;
+                flex-basis: 18%;
+                max-width: 18%;
             }
 
             .species {
-                flex-basis: 60%;
-                max-width: 60%;
+                flex-basis: 52%;
+                max-width: 52%;
             }
 
             .family {
@@ -227,6 +228,25 @@ export class TaxonResults extends LitElement {
                 justify-content: flex-start;
                 margin-top: 12px;
                 margin-bottom: 24px;
+            }
+        }
+
+        @media only screen and (max-width: 38em) {
+            .score {
+                flex-basis: 25%;
+                max-width: 25%;
+            }
+
+            .species {
+                flex-basis: 75%;
+                max-width: 75%;
+            }
+            .family {
+                flex-basis: 100%;
+                max-width: 100%;
+                text-align: start;
+                margin-left: 25%;
+                margin-top: 12px;
             }
         }
 

@@ -4,13 +4,11 @@ import { ImagePickEvent } from './ImagePicker.js'
 
 export class ImageSelected extends LitElement {
     static styles = css`
-        :host {
-        }
-
         .container {
             display: flex;
             flex-direction: row;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .col {
@@ -31,19 +29,26 @@ export class ImageSelected extends LitElement {
             padding: 0.2rem 1rem 0.2rem 0.2rem;
         }
 
+        .images {
+            display: flex;
+            flex-wrap: wrap;
+            flex: 1;
+        }
+
         .imgContainer {
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
             position: relative;
             border-radius: 4px;
             overflow: hidden;
-            margin-right: 12px;
+            margin-right: 6px;
+            margin-bottom: 6px;
         }
         .imgContainer img {
             object-position: center;
             object-fit: cover;
-            height: 150px;
-            width: 150px;
+            height: 120px;
+            width: 120px;
         }
         .imgRemove {
             background: transparent;
@@ -61,6 +66,18 @@ export class ImageSelected extends LitElement {
         }
         .imgRemove:hover svg {
             filter: drop-shadow(2px 2px 3px rgba(83, 85, 89, 0.7)) brightness(80%);
+        }
+
+        @media only screen and (max-width: 48em) {
+            p {
+                flex-basis: 100%;
+                max-width: 100%;
+            }
+
+            .blankSpaceLeft {
+                flex-basis: 0;
+                max-width: 0;
+            }
         }
     `
 
@@ -99,27 +116,29 @@ export class ImageSelected extends LitElement {
             <div class="container">
                 <div class="col blankSpaceLeft"></div>
                 <p>Original image(s)</p>
-                ${this.images.map(
-                    image => html`
-                        <div class="imgContainer">
-                            <img width="400" src="${URL.createObjectURL(image)}" alt="" />
-                            <button class="imgRemove" @click="${this.__onImageRemove(image)}">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="#FFF"
-                                >
-                                    <path
-                                        d="M17,13H7V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
-                                    />
-                                </svg>
-                            </button>
-                        </div>
-                    `
-                )}
-                ${addImageButton}
+                <div class="images">
+                    ${this.images.map(
+                        image => html`
+                            <div class="imgContainer">
+                                <img width="400" src="${URL.createObjectURL(image)}" alt="" />
+                                <button class="imgRemove" @click="${this.__onImageRemove(image)}">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="#FFF"
+                                    >
+                                        <path
+                                            d="M17,13H7V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
+                                        />
+                                    </svg>
+                                </button>
+                            </div>
+                        `
+                    )}
+                    ${addImageButton}
+                </div>
             </div>
         `
     }
