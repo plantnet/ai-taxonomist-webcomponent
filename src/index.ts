@@ -1,1 +1,1 @@
-export { AiTaxonomist } from './AiTaxonomist.js';
+export { AiTaxonomist } from './AiTaxonomist.js'

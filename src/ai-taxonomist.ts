@@ -1,3 +1,3 @@
-import { AiTaxonomist } from './AiTaxonomist.js';
+import { AiTaxonomist } from './AiTaxonomist.js'
 
-window.customElements.define('ai-taxonomist', AiTaxonomist);
+window.customElements.define('ai-taxonomist', AiTaxonomist)

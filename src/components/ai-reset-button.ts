@@ -1,3 +1,3 @@
-import { AIButtonReset } from './AIButtonReset.js';
+import { AIButtonReset } from './AIButtonReset.js'
 
-window.customElements.define('ai-button-reset', AIButtonReset);
+window.customElements.define('ai-button-reset', AIButtonReset)

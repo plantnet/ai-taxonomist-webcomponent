@@ -1,3 +1,3 @@
-import { AILoader } from './AILoader.js';
+import { AILoader } from './AILoader.js'
 
-window.customElements.define('ai-loader', AILoader);
+window.customElements.define('ai-loader', AILoader)
