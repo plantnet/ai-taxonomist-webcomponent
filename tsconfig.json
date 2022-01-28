@@ -11,7 +11,7 @@
     "strict": true,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
-    //"importHelpers": true,
+    "importHelpers": true,
     "outDir": "dist",
     "sourceMap": true,
     "inlineSources": true,
