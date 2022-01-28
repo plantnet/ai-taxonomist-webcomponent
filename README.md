@@ -1,12 +1,29 @@
+
+<h1 align="center">
+    <strong><code> < ai-taxonomist > </code></strong>
+</1>
+
+<h3 align="center">
+  <a href="https://cos4cloud-eosc.eu/services/ai-taxonomist/">Cos4Cloud</a>
+  <span> · </span>
+  <a href="https://my.plantnet.org/">API</a>
+</h3>
+
+---
+
 # \<ai-taxonomist>
+
+A WebComponent within AI-Taxonomist project to identify plants|frog|anything in any web pages. 
 
 This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
 
-## Installation
+## Demo
 
-```bash
-npm i ai-taxonomist
-```
+
+<p align="center">
+    <a href="https://plantnet.org/ai-taxonomist-demo/" target="_blank">plantnet.org/ai-taxonomist-demo/</a>
+  <img src="/demo.gif" alt="Demo of the Web Component" />
+</p>
 
 ## Usage
 
@@ -16,16 +33,15 @@ npm i ai-taxonomist
     - Run the nginx docker image: `docker run -it -d -p 3000:80 nginx-ai-taxo`
 
 2. There is several ways to use the web components: 
-    1. Within a web page in html (example: a WordPress or a static website)
+    1. Within a **web page in html** (example: a WordPress or a static website)
     ```html
     <script src="https://unpkg.com/ai-taxonomist/dist/src/index.js?module" type="module"></script>
     <ai-taxonomist serverUrl="http://localhost:3000"></ai-taxonomist>
     ```
-   2. Within a JavaScript project (React, Vue, Svelte, Angular, etc): 
+   2. Within a **JavaScript project (React, Vue, Svelte, Angular, etc)**: 
        - a. Install the package: `npm i ai-taxonomist`
        - b. Import the package: `import 'ai-taxonomist';`
        - c. Add the component: `<ai-taxonomist></ai-taxonomist>`
-
 
 ## Linting and formatting
 
