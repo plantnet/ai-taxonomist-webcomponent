@@ -19,9 +19,6 @@ export type ImageType = {
 
 export class TaxonResults extends LitElement {
     static styles = css`
-    :host {
-    }
-
     .container {
         display: flex;
         flex-direction: column;
