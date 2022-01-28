@@ -219,6 +219,7 @@ export class TaxonResults extends LitElement {
         from { opacity:0; }
         to { opacity:1; }
     }
+
     @keyframes animateIn {
         from {
             opacity:0;
