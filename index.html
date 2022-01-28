@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+    <meta charset="utf-8">
+    <title>AI Taxonomist</title>
+    <style>
+        body {
+            background: #FEFEFE;
+            color: #EEE;
+            font-family: sans-serif;
+        }
+        h1, h2, h3, p {
+            color: #EEE;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #333;
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="demo"></div>
+
+<script type="module">
+    import { html, render } from 'lit';
+    import './dist/src/ai-taxonomist.js';
+
+    const serverUrl = 'http://localhost:3000';
+    render(
+        html`
+        <ai-taxonomist .serverUrl=${serverUrl}></ai-taxonomist>
+      `,
+        document.querySelector('#demo')
+    );
+</script>
+</body>
+</html>

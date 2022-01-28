@@ -3,13 +3,19 @@
   "description": "Webcomponent ai-taxonomist following open-wc recommendations",
   "license": "MIT",
   "author": "ai-taxonomist",
-  "version": "0.0.0",
+  "version": "0.0.4",
+  "homepage": "https://github.com/plantnet/ai-taxonomist",
+  "repository": "plantnet/ai-taxonomist",
   "main": "dist/src/index.js",
   "module": "dist/src/index.js",
+  "type": "module",
   "exports": {
     ".": "./dist/src/index.js",
     "./ai-taxonomist.js": "./dist/src/ai-taxonomist.js"
   },
+  "files": [
+    "dist/src"
+  ],
   "scripts": {
     "analyze": "cem analyze --litelement",
     "start": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wds\"",
