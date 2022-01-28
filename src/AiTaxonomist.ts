@@ -88,10 +88,7 @@ export class AiTaxonomist extends LitElement {
     @property({type: Array}) imageFiles: File[] = []
     @property({type: String}) serverUrl = 'http://localhost:3000'
     @property({type: Number}) maxImages = 5
-
-    @property({attribute: false})
-    identify = {...INIT_IDENTIFY_STATE}
-
+    @property({attribute: false}) identify = {...INIT_IDENTIFY_STATE}
 
     __onImagePick(e: ImagePickEvent) {
         this.imageFiles = e.detail.files
