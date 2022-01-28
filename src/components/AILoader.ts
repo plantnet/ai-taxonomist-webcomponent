@@ -4,7 +4,6 @@ export class AILoader extends LitElement {
     static styles = css`
     :host {
     }
-
     .loader {
         display: inline-block;
         position: relative;
@@ -73,12 +72,9 @@ export class AILoader extends LitElement {
             transform: translate(24px, 0);
         }
     }
-
-
     `
 
     render() {
         return html`<div class="loader"><div></div><div></div><div></div><div></div></div>`
     }
-
 }

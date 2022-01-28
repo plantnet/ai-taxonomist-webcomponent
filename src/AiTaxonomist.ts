@@ -83,7 +83,7 @@ export class AiTaxonomist extends LitElement {
             margin-left: 0;
         }
     }
-  `
+    `
 
     @property({type: Array}) imageFiles: File[] = []
     @property({type: String}) serverUrl = 'http://localhost:3000'
