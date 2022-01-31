@@ -1,5 +1,6 @@
 import { IdentifyErrorResponse, IdentifySuccessResponse, Result } from './types.js'
 import { ResultType } from '../TaxonResults.js'
+import { getBrowserLang } from './getBrowserLang.js'
 
 export const identifyRequest = async (
     images: File[],
@@ -16,6 +17,7 @@ export const identifyRequest = async (
     const url = new URL(serverUrl)
     url.pathname = '/v2/identify/all'
     url.searchParams.append('include-related-images', 'true')
+    url.searchParams.append('lang', getBrowserLang())
     if (apiKey && apiKey.length) {
         url.searchParams.append('api-key', apiKey)
     }
