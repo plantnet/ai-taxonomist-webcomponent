@@ -15,10 +15,9 @@
 
 A WebComponent within AI-Taxonomist project to identify plants|frog|anything in any web pages. 
 
-This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
+This WebComponent follows the [open-wc](https://github.com/open-wc/open-wc) recommendation.
 
 ## Demo
-
 
 <p align="center">
     <a href="https://plantnet.org/ai-taxonomist-demo/" target="_blank">plantnet.org/ai-taxonomist-demo/</a>
