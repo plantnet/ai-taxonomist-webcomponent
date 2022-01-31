@@ -125,8 +125,6 @@ export class AiTaxonomist extends LitElement {
         this.identify.error = null
         this.identify.state = IdentifyState.Loading
 
-        console.log(this.apiKey)
-
         const response = await identifyRequest(this.imageFiles, this.serverUrl, this.apiKey)
 
         if (typeof response === 'string') {
