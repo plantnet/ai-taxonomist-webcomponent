@@ -3,7 +3,7 @@
   "description": "Webcomponent ai-taxonomist following open-wc recommendations",
   "license": "MIT",
   "author": "ai-taxonomist",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "homepage": "https://github.com/plantnet/ai-taxonomist",
   "repository": "plantnet/ai-taxonomist",
   "main": "dist/src/index.js",
@@ -58,7 +58,9 @@
     ],
     "rules": {
       "no-shadow": "off",
-      "@typescript-eslint/no-shadow": ["error"],
+      "@typescript-eslint/no-shadow": [
+        "error"
+      ],
       "no-unused-vars": "off",
       "@typescript-eslint/no-unused-vars": [
         "error"
