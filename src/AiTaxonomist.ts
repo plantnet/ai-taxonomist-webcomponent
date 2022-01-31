@@ -86,15 +86,11 @@ export class AiTaxonomist extends LitElement {
 
     @property({ type: String }) serverUrl = 'http://localhost:3000'
 
+    @property({ type: String }) apiKey: string | null = null
+
     @property({ type: Number }) maxImages = 5
 
     @property({ attribute: false }) identify = { ...INIT_IDENTIFY_STATE }
-
-    __onImagePick(e: ImagePickEvent) {
-        this.imageFiles = e.detail.files
-
-        this.runIdentify()
-    }
 
     __addImages(e: ImagePickEvent) {
         const { files } = e.detail
@@ -129,7 +125,9 @@ export class AiTaxonomist extends LitElement {
         this.identify.error = null
         this.identify.state = IdentifyState.Loading
 
-        const response = await identifyRequest(this.imageFiles, this.serverUrl)
+        console.log(this.apiKey)
+
+        const response = await identifyRequest(this.imageFiles, this.serverUrl, this.apiKey)
 
         if (typeof response === 'string') {
             this.identify.state = IdentifyState.Error
@@ -145,7 +143,7 @@ export class AiTaxonomist extends LitElement {
         switch (this.identify.state) {
             default:
             case IdentifyState.Idle:
-                return html` <image-picker @imagepick=${this.__onImagePick}></image-picker> `
+                return html` <image-picker @imagepick=${this.__addImages}></image-picker> `
             case IdentifyState.Loading:
             case IdentifyState.Error:
             case IdentifyState.Loaded:

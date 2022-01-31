@@ -29,10 +29,10 @@
     import { html, render } from 'lit';
     import './dist/src/ai-taxonomist.js';
 
-    const serverUrl = 'http://localhost:3000';
+    const serverUrl = 'https://my-api.plantnet.org';
     render(
         html`
-        <ai-taxonomist .serverUrl=${serverUrl}></ai-taxonomist>
+        <ai-taxonomist .serverUrl=${serverUrl} apiKey="2b10prbV5tQxT9nEOCqFParMn" maxImages="2"></ai-taxonomist>
       `,
         document.querySelector('#demo')
     );

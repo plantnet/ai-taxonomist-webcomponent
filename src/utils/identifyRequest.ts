@@ -1,7 +1,11 @@
 import { IdentifyErrorResponse, IdentifySuccessResponse, Result } from './types.js'
 import { ResultType } from '../TaxonResults.js'
 
-export const identifyRequest = async (images: File[], serverUrl: string): Promise<ResultType[] | string> => {
+export const identifyRequest = async (
+    images: File[],
+    serverUrl: string,
+    apiKey: string | null
+): Promise<ResultType[] | string> => {
     const form = new FormData()
 
     for (let i = 0; i < images.length; i += 1) {
@@ -12,6 +16,9 @@ export const identifyRequest = async (images: File[], serverUrl: string): Promis
     const url = new URL(serverUrl)
     url.pathname = '/v2/identify/all'
     url.searchParams.append('include-related-images', 'true')
+    if (apiKey && apiKey.length) {
+        url.searchParams.append('api-key', apiKey)
+    }
 
     try {
         const response = await fetch(url.toString(), {
