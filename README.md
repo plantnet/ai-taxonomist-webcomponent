@@ -1,7 +1,7 @@
 
 <h1 align="center">
     <strong><code> < ai-taxonomist > </code></strong>
-</1>
+</h1>
 
 <h3 align="center">
   <a href="https://cos4cloud-eosc.eu/services/ai-taxonomist/">Cos4Cloud</a>
@@ -28,7 +28,7 @@ This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) reco
 ## Usage
 
 1. Setup server: 
-    This part is necessary to use the webcomponent on PlantNet API but you usage may vary if you host your own API.    
+    This part is necessary to use the [WebComponent](https://developer.mozilla.org/docs/Web/Web_Components) on PlantNet API but your usage may vary if you host your own API.    
     - Build the nginx docker image: `docker build -t nginx-ai-taxo -f Dockerfile --build-arg APIKEY=XXXX .`  Don't forget to get your API key on [PlantNet API](https://my.plantnet.org/).
     - Run the nginx docker image: `docker run -it -d -p 3000:80 nginx-ai-taxo`
 
@@ -43,45 +43,39 @@ This webcomponent follows the [open-wc](https://github.com/open-wc/open-wc) reco
        - b. Import the package: `import 'ai-taxonomist';`
        - c. Add the component: `<ai-taxonomist></ai-taxonomist>`
 
-## Linting and formatting
-
-To scan the project for linting and formatting errors, run
-
-```bash
-npm run lint
-```
-
-To automatically fix linting and formatting errors, run
-
-```bash
-npm run format
-```
-
-## Demoing with Storybook
-
-To run a local instance of Storybook for your component, run
-
-```bash
-npm run storybook
-```
-
-To build a production version of Storybook, run
-
-```bash
-npm run storybook:build
-```
+### Options
 
 
-## Tooling configs
+- **`serverUrl`**: the server url to call, either local or remote  
+    Example with a Local url (the server will need to add the API key):  
+    ```
+    <ai-taxonomist serverUrl="http://localhost:3000"></ai-taxonomist>
+    ```
+- **`apiKey`**: the API key to use, if not added by the server. On Pl@ntNet API you currently cannot use the apiKey directly due to CORS being checked (so you need to add a proxy at least, cf `server` nginx config).   
+    Example for Pl@ntNet:  
+    ```
+    <ai-taxonomist serverUrl="https://my-api.plantnet.org" apiKey="XXXXXXXXX"></ai-taxonomist>
+    ```
+- **`maxImages`**: The number of images the user can upload for a single identification, default to 5. 
 
-For most of the tools, the configuration is in the `package.json` to reduce the amount of files in your project.
+## Development / contributions
 
-If you customize the configuration a lot, you can consider moving them to individual files.
-
-## Local Demo with `web-dev-server`
+### Start the development server
 
 ```bash
 npm start
 ```
 
-To run a local development server that serves the basic demo located in `demo/index.html`
+This should open http://localhost:8000 in your browser.
+
+### Linting and formatting
+
+To scan the project for linting and formatting errors, run `npm run lint`
+
+To automatically fix linting and formatting errors, run `npm run format`
+
+### Demoing with Storybook
+
+To run a local instance of Storybook; run `npm run storybook`
+To build a production version of Storybook, run `npm run storybook:build`
+
