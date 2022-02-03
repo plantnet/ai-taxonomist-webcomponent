@@ -29,10 +29,10 @@
     import { html, render } from 'lit';
     import './dist/src/ai-taxonomist.js';
 
-    const serverUrl = 'http://localhost:3000';
+    const apiUrl = 'http://localhost:3000/v2/identify/all';
     render(
         html`
-        <ai-taxonomist .serverUrl=${serverUrl} .allowPlantNetBranding=${true}></ai-taxonomist>
+        <ai-taxonomist .apiUrl=${apiUrl} .allowPlantNetBranding=${true}></ai-taxonomist>
       `,
         document.querySelector('#demo')
     );

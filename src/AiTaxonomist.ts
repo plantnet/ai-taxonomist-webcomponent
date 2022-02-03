@@ -84,7 +84,7 @@ export class AiTaxonomist extends LitElement {
 
     @property({ type: Array }) imageFiles: File[] = []
 
-    @property({ type: String }) serverUrl = 'https://my-api.plantnet.org'
+    @property({ type: String }) apiUrl = 'https://my-api.plantnet.org/v2/identify/all'
 
     @property({ type: String }) apiKey: string | null = null
 
@@ -98,7 +98,7 @@ export class AiTaxonomist extends LitElement {
 
     connectedCallback() {
         super.connectedCallback()
-        if (this.allowPlantNetBranding && this.serverUrl.includes('https://my-api.plantnet.org')) {
+        if (this.allowPlantNetBranding && this.apiUrl.includes('https://my-api.plantnet.org')) {
             this.isPlantNetBranded = true
         }
     }
@@ -136,7 +136,7 @@ export class AiTaxonomist extends LitElement {
         this.identify.error = null
         this.identify.state = IdentifyState.Loading
 
-        const response = await identifyRequest(this.imageFiles, this.serverUrl, this.apiKey)
+        const response = await identifyRequest(this.imageFiles, this.apiUrl, this.apiKey)
 
         if (typeof response === 'string') {
             this.identify.state = IdentifyState.Error
