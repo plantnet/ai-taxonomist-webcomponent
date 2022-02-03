@@ -40,6 +40,7 @@ export const identifyRequest = async (
             author: result.species.scientificNameAuthorship,
             family: result.species.family.scientificName,
             commonNames: result.species.commonNames,
+            gbifUrl: result.gbif ? `https://www.gbif.org/species/${result.gbif.id}` : null,
             images: result.images
                 .map(image => ({
                     url: image.url.o,
