@@ -56,6 +56,7 @@ This WebComponent follows the [open-wc](https://github.com/open-wc/open-wc) reco
     <ai-taxonomist serverUrl="https://my-api.plantnet.org" apiKey="XXXXXXXXX"></ai-taxonomist>
     ```
 - **`maxImages`**: The number of images the user can upload for a single identification, default to 5. 
+- **`allowPlantNetBranding`**: (default: true) if true, the component will display the PlantNet logo and the link to the PlantNet website. 
 
 ## Development / contributions
 

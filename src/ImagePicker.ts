@@ -5,6 +5,7 @@ import "file-drop-element"
 // eslint-disable-next-line
 import { FileDropEvent } from 'file-drop-element'
 import { property } from 'lit/decorators.js'
+import './components/plantnet-brand.js'
 
 export type ImagePickEvent = Event & {
     type: 'imagepick'
@@ -50,6 +51,12 @@ export class ImagePicker extends LitElement {
             background-color: red;
         }
 
+        plantnet-brand {
+            margin-top: 6px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
         @media (prefers-color-scheme: dark) {
             file-drop label {
                 outline-color: #888;
@@ -67,6 +74,8 @@ export class ImagePicker extends LitElement {
     `
 
     @property({ type: Boolean }) inlineMode: boolean = false
+
+    @property({ type: Boolean }) plantnetBrand: boolean = false
 
     __onFileDrop(e: FileDropEvent) {
         if (e.files.length) {
@@ -124,6 +133,7 @@ export class ImagePicker extends LitElement {
                     @change="${this.__onFileUpload}"
                 />
             </file-drop>
+            ${this.plantnetBrand ? html`<plantnet-brand></plantnet-brand>` : ''}
         `
     }
 }

@@ -84,13 +84,24 @@ export class AiTaxonomist extends LitElement {
 
     @property({ type: Array }) imageFiles: File[] = []
 
-    @property({ type: String }) serverUrl = 'http://localhost:3000'
+    @property({ type: String }) serverUrl = 'https://my-api.plantnet.org'
 
     @property({ type: String }) apiKey: string | null = null
 
-    @property({ type: Number }) maxImages = 5
+    @property({ type: Number }) maxImages: number = 5
+
+    @property({ type: Boolean }) allowPlantNetBranding: boolean = true
+
+    @property({ type: Boolean }) isPlantNetBranded: boolean = false
 
     @property({ attribute: false }) identify = { ...INIT_IDENTIFY_STATE }
+
+    connectedCallback() {
+        super.connectedCallback()
+        if (this.allowPlantNetBranding && this.serverUrl.includes('https://my-api.plantnet.org')) {
+            this.isPlantNetBranded = true
+        }
+    }
 
     __addImages(e: ImagePickEvent) {
         const { files } = e.detail
@@ -141,7 +152,12 @@ export class AiTaxonomist extends LitElement {
         switch (this.identify.state) {
             default:
             case IdentifyState.Idle:
-                return html` <image-picker @imagepick=${this.__addImages}></image-picker> `
+                return html`
+                    <image-picker
+                        @imagepick=${this.__addImages}
+                        ?plantnetBrand=${this.isPlantNetBranded}
+                    ></image-picker>
+                `
             case IdentifyState.Loading:
             case IdentifyState.Error:
             case IdentifyState.Loaded:
@@ -158,6 +174,7 @@ export class AiTaxonomist extends LitElement {
                         .results=${this.identify.results}
                         .error=${this.identify.error}
                         ?loading=${this.identify.state === IdentifyState.Loading}
+                        ?plantnetBrand=${this.isPlantNetBranded}
                     ></taxon-results>
                     <ai-button-reset @press=${this.reset}>New identification</ai-button-reset>
                 `

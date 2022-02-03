@@ -32,7 +32,7 @@
     const serverUrl = 'http://localhost:3000';
     render(
         html`
-        <ai-taxonomist .serverUrl=${serverUrl}></ai-taxonomist>
+        <ai-taxonomist .serverUrl=${serverUrl} .allowPlantNetBranding=${true}></ai-taxonomist>
       `,
         document.querySelector('#demo')
     );
