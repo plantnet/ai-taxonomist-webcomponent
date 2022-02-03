@@ -4,7 +4,7 @@ import { getBrowserLang } from './getBrowserLang.js'
 
 export const identifyRequest = async (
     images: File[],
-    serverUrl: string,
+    apiUrl: string,
     apiKey: string | null
 ): Promise<ResultType[] | string> => {
     const form = new FormData()
@@ -14,8 +14,7 @@ export const identifyRequest = async (
         form.append('images', images[i])
     }
 
-    const url = new URL(serverUrl)
-    url.pathname = '/v2/identify/all'
+    const url = new URL(apiUrl)
     url.searchParams.append('include-related-images', 'true')
     url.searchParams.append('lang', getBrowserLang())
     if (apiKey && apiKey.length) {

@@ -2,6 +2,7 @@ import { html, css, LitElement } from 'lit'
 import { property } from 'lit/decorators.js'
 import { round } from './utils/round.js'
 import './components/ai-loader.js'
+import { GBIF_LOGO } from './utils/icons.js'
 
 export type ImageType = {
     url: string
@@ -24,6 +25,15 @@ export class TaxonResults extends LitElement {
             display: flex;
             flex-direction: column;
             animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .separatorContainer {
+            display: flex;
+            align-items: center;
+        }
+
+        plantnet-brand {
+            margin-top: -4px;
         }
 
         .title {
@@ -300,6 +310,8 @@ export class TaxonResults extends LitElement {
 
     @property({ type: Boolean }) loading: boolean = false
 
+    @property({ type: Boolean }) plantnetBrand: boolean = false
+
     render() {
         const loading = this.loading ? html`<ai-loader></ai-loader>` : null
         const error = this.error ? html`<p>${this.error}</p>` : null
@@ -311,7 +323,10 @@ export class TaxonResults extends LitElement {
 
         return html`
             <div class="container">
-                <p class="title"><span>Results</span></p>
+                <div class="separatorContainer">
+                    <p class="title"><span>Results</span></p>
+                    ${this.plantnetBrand ? html`<plantnet-brand></plantnet-brand>` : ''}
+                </div>
                 ${loading} ${error}
                 <ul>
                     ${this.results.slice(0, maxResults).map(
@@ -328,52 +343,7 @@ export class TaxonResults extends LitElement {
                                     <span title="${result.family}">${result.family}</span>
                                     ${result.gbifUrl
                                         ? html`<a href="${result.gbifUrl}" target="_blank" class="gbif"
-                                              ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 433.24 174.64">
-                                                  <defs>
-                                                      <style>
-                                                          .cls-1 {
-                                                              fill: #4c9c2e;
-                                                          }
-                                                          .cls-2 {
-                                                              fill: #231f20;
-                                                          }
-                                                      </style>
-                                                  </defs>
-                                                  <g id="mark">
-                                                      <path
-                                                          class="cls-1"
-                                                          d="M142.45,184.51c0-34.08,16.63-63.57,66.12-63.57,0,34.15-22.46,63.57-66.12,63.57"
-                                                          transform="translate(-65.55 -99.35)"
-                                                      />
-                                                      <path
-                                                          class="cls-1"
-                                                          d="M221.74,274a65.16,65.16,0,0,0,23.71-4c0-27-16.09-46.24-44.51-60.13C179.2,198.94,152.43,193.3,128,193.3c10.72-32.15,2.91-72.05-7.47-94-11.5,22.94-18.68,62.28-7.64,94.28-21.68,1.58-38.88,11-46.16,23.48-.55.95-1.65,3-1,3.32s1.36-.57,1.88-1A41.63,41.63,0,0,1,95.8,208.6c23,0,39.27,19.1,50.76,30.58,24.68,24.68,48.8,34.86,75.18,34.81"
-                                                          transform="translate(-65.55 -99.35)"
-                                                      />
-                                                  </g>
-                                                  <g id="outlined_logotype" data-name="outlined logotype">
-                                                      <path
-                                                          class="cls-2"
-                                                          d="M316.84,147.33l-12,6.15a4.62,4.62,0,0,1-1.8.75c-.45,0-.9-.3-1.2-1-2.7-6.45-6.6-8.85-10.65-8.85h-9.9a11,11,0,0,0-10.8,10.8v44.4a11,11,0,0,0,10.8,10.8h7.35a10.63,10.63,0,0,0,10.65-10.8v-7.05c0-1-.45-1.5-1.5-1.5h-14.1c-1.05,0-1.5-.45-1.5-1.5V176.73c0-1,.45-1.5,1.5-1.5H315c1,0,1.5.45,1.5,1.5v22.8c0,15.6-11,26.55-27.9,26.55h-7.35c-17.1,0-27.9-11-27.9-26.55v-44.4c0-15.6,10.8-26.55,27.9-26.55h9.9c12.45,0,19.2,5.1,23.7,12.15,1.35,2.25,2.85,4.65,2.85,5.55C317.74,146.73,317.44,147,316.84,147.33Z"
-                                                          transform="translate(-65.55 -99.35)"
-                                                      />
-                                                      <path
-                                                          class="cls-2"
-                                                          d="M364.54,224.58H330.79c-1.05,0-1.5-.45-1.5-1.5v-91.5c0-1.05.45-1.5,1.5-1.5h33.75c17.1,0,27.9,10.95,27.9,27.9v1.5c0,5.55-3.6,12-7.95,16.2a1.22,1.22,0,0,0,0,2.1c4.35,4.2,7.95,11.4,7.95,16.95V197C392.44,213.93,381.64,224.58,364.54,224.58Zm10.8-68a11,11,0,0,0-10.8-10.8H348c-1.05,0-1.5.45-1.5,1.5v19.95c0,1.05.45,1.5,1.5,1.5h16.5a11,11,0,0,0,10.8-10.8Zm0,38.55a10.63,10.63,0,0,0-10.8-10.65H348c-1.05,0-1.5.45-1.5,1.5v21.3c0,1,.45,1.5,1.5,1.5h16.5a10.75,10.75,0,0,0,10.8-10.8Z"
-                                                          transform="translate(-65.55 -99.35)"
-                                                      />
-                                                      <path
-                                                          class="cls-2"
-                                                          d="M422.44,224.58H408.19c-1.05,0-1.5-.45-1.5-1.5v-91.5c0-1.05.45-1.5,1.5-1.5h14.25c1.05,0,1.5.45,1.5,1.5v91.5C423.94,224.13,423.49,224.58,422.44,224.58Z"
-                                                          transform="translate(-65.55 -99.35)"
-                                                      />
-                                                      <path
-                                                          class="cls-2"
-                                                          d="M497.28,145.83H461.59c-1,0-1.5.45-1.5,1.5v19.95c0,1.05.45,1.5,1.5,1.5h29.24c1.05,0,1.5.45,1.5,1.5V183c0,1.05-.45,1.5-1.5,1.5H461.59c-1,0-1.5.45-1.5,1.5v37.05c0,1-.45,1.5-1.5,1.5H444.34c-1,0-1.5-.45-1.5-1.5v-91.5c0-1.05.45-1.5,1.5-1.5h52.94c1.05,0,1.5.45,1.5,1.5v12.75C498.78,145.38,498.33,145.83,497.28,145.83Z"
-                                                          transform="translate(-65.55 -99.35)"
-                                                      />
-                                                  </g></svg
-                                              ><svg
+                                              >${GBIF_LOGO}<svg
                                                   xmlns="http://www.w3.org/2000/svg"
                                                   width="24"
                                                   height="24"

@@ -45,17 +45,18 @@ This WebComponent follows the [open-wc](https://github.com/open-wc/open-wc) reco
 ### Options
 
 
-- **`serverUrl`**: the server url to call, either local or remote  
+- **`apiUrl`**: (default: `https://my-api.plantnet.org/v2/identify/all`) the server url to call, either local or remote  
     Example with a Local url (the server will need to add the API key):  
     ```
-    <ai-taxonomist serverUrl="http://localhost:3000"></ai-taxonomist>
+    <ai-taxonomist apiUrl="http://localhost:3000"></ai-taxonomist>
     ```
 - **`apiKey`**: the API key to use, if not added by the server. On Pl@ntNet API you currently cannot use the apiKey directly due to CORS being checked (so you need to add a proxy at least, cf `server` nginx config).   
     Example for Pl@ntNet:  
     ```
-    <ai-taxonomist serverUrl="https://my-api.plantnet.org" apiKey="XXXXXXXXX"></ai-taxonomist>
+    <ai-taxonomist apiUrl="https://my-api.plantnet.org" apiKey="XXXXXXXXX"></ai-taxonomist>
     ```
 - **`maxImages`**: The number of images the user can upload for a single identification, default to 5. 
+- **`allowPlantNetBranding`**: (default: true) if true, the component will display the PlantNet logo and the link to the PlantNet website. 
 
 ## Development / contributions
 
