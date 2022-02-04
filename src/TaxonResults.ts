@@ -192,6 +192,7 @@ export class TaxonResults extends LitElement {
 
         .gbif {
             display: flex;
+            align-items: center;
             width: 50px;
             border-radius: 4px;
             padding: 0 0.35rem;
