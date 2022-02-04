@@ -1,23 +1,9 @@
-import { html, css, LitElement } from 'lit'
+import { css, html, LitElement } from 'lit'
 import { property } from 'lit/decorators.js'
 import { round } from './utils/round.js'
 import './components/ai-loader.js'
 import { GBIF_LOGO } from './utils/icons.js'
-
-export type ImageType = {
-    url: string
-    alt: string
-}
-
-export type ResultType = {
-    score: number
-    speciesName: string
-    author: string
-    family: string
-    commonNames: string[]
-    images: ImageType[]
-    gbifUrl: string | null
-}
+import { ResultType } from './utils/types.js'
 
 export class TaxonResults extends LitElement {
     static styles = css`
@@ -192,6 +178,7 @@ export class TaxonResults extends LitElement {
 
         .gbif {
             display: flex;
+            align-items: center;
             width: 50px;
             border-radius: 4px;
             padding: 0 0.35rem;
@@ -312,7 +299,25 @@ export class TaxonResults extends LitElement {
 
     @property({ type: Boolean }) plantnetBrand: boolean = false
 
+    onAttachmentClick(result: ResultType) {
+        return (e: Event) => {
+            e.preventDefault()
+            const detail = result
+            this.dispatchEvent(
+                new CustomEvent('aiTaxonomistAttachmentsClick', {
+                    detail,
+                    bubbles: true,
+                    composed: true,
+                    cancelable: true,
+                })
+            )
+        }
+    }
+
     render() {
+        const template: HTMLTemplateElement | null = <HTMLTemplateElement>(
+            document.getElementById('aitaxonomist-attachments-template')
+        )
         const loading = this.loading ? html`<ai-loader></ai-loader>` : null
         const error = this.error ? html`<p>${this.error}</p>` : null
         const maxResults = 8
@@ -338,6 +343,14 @@ export class TaxonResults extends LitElement {
                                 <div class="col col-text species">
                                     <p class="speciesName">${result.speciesName} <span>${result.author}</span></p>
                                     <p>${result.commonNames[0]}</p>
+                                    ${template
+                                        ? html`<div
+                                              @click=${this.onAttachmentClick(result)}
+                                              @keyDown=${this.onAttachmentClick(result)}
+                                          >
+                                              ${template.content.cloneNode(true)}
+                                          </div>`
+                                        : ''}
                                 </div>
                                 <div class="col col-text family">
                                     <span title="${result.family}">${result.family}</span>

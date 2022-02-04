@@ -31,7 +31,12 @@ export const POWERED_BY_PLANTNET_DARK = html`<svg viewBox="0 0 859 236" fill="no
     />
 </svg>`
 
-export const GBIF_LOGO = html`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 433.24 174.64">
+export const GBIF_LOGO = html`<svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 433.24 174.64"
+    width="40px"
+    height="13px"
+>
     <defs>
         <style>
             .cls-1 {

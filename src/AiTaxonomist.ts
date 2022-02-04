@@ -5,8 +5,8 @@ import './image-selected.js'
 import './taxon-results.js'
 import './components/ai-reset-button.js'
 import { ImagePickEvent } from './ImagePicker.js'
-import { ResultType } from './TaxonResults.js'
 import { identifyRequest } from './utils/identifyRequest.js'
+import { ResultType } from './utils/types.js'
 
 enum IdentifyState {
     Idle,

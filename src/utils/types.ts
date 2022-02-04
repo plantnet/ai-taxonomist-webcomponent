@@ -1,4 +1,4 @@
-export type Result = {
+export type ServerResult = {
     gbif: {
         id: string
     }
@@ -30,11 +30,24 @@ export type Result = {
 }
 
 export type IdentifySuccessResponse = {
-    results: Result[]
+    results: ServerResult[]
 }
 
 export type IdentifyErrorResponse = {
     statusCode: number
     error: string
     message: string
+}
+export type ImageType = {
+    url: string
+    alt: string
+}
+export type ResultType = {
+    score: number
+    speciesName: string
+    author: string
+    family: string
+    commonNames: string[]
+    images: ImageType[]
+    gbifUrl: string | null
 }
