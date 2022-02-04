@@ -12,6 +12,8 @@ export type ServerResult = {
         organ: string
         url: {
             o: string
+            m: string
+            s: string
         }
     }[]
     score: number
