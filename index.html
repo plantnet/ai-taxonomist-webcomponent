@@ -31,8 +31,10 @@
     import './dist/src/ai-taxonomist.js'
 
     document.addEventListener('aiTaxonomistAttachmentsClick', (e) => {
+        // eslint-disable-next-line no-console
         console.log("Attachments clicked", e.detail)
-        alert('Attachments clicked: ' + e.detail.speciesName)
+        // eslint-disable-next-line no-alert
+        alert(`Attachments clicked: ${e.detail.speciesName}`)
     })
 
     const apiUrl = 'http://localhost:3000/v2/identify/all'
