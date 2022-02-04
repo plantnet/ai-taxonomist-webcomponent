@@ -79,7 +79,7 @@ This WebComponent follows the [open-wc](https://github.com/open-wc/open-wc) reco
         alert('Attachments clicked: ' + e.detail.speciesName)
     })
     ```
-    The detail will contain the properties listed [here](). 
+    The detail will contain the properties listed [here](https://github.com/plantnet/ai-taxonomist/blob/main/src/utils/types.ts#L45). 
   
   
 
