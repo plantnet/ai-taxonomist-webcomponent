@@ -57,6 +57,31 @@ This WebComponent follows the [open-wc](https://github.com/open-wc/open-wc) reco
     ```
 - **`maxImages`**: The number of images the user can upload for a single identification, default to 5. 
 - **`allowPlantNetBranding`**: (default: true) if true, the component will display the PlantNet logo and the link to the PlantNet website. 
+- **Attachments**: You can attach HTML elements to each result, for example if you want to let the user select the correct taxon. This can be achieve using an HTML `<template>` as follows: 
+    ```html
+     <template id="aitaxonomist-attachments-template">
+         <style>
+             button {
+                border: 1px solid #8888FF;
+                background: transparent;
+             }
+             button:hover {
+                filter: brightness(1.2);
+             }
+         </style>
+         <button>SELECT SPECIES</button>
+     </template>
+    <ai-taxonomist> </ai-taxonomist>
+    ```
+    You should NOT attach a click listener on your side. The AiTaxonomist component will listen for the click and fire a new event named `aiTaxonomistAttachmentsClick` which contain the selected taxon details in `event.detail`: 
+    ```js
+    document.addEventListener('aiTaxonomistAttachmentsClick', (e) => {
+        alert('Attachments clicked: ' + e.detail.speciesName)
+    })
+    ```
+    The detail will contain the properties listed [here](). 
+  
+  
 
 ## Development / contributions
 

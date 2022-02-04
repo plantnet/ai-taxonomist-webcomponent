@@ -11,6 +11,7 @@
             color: #EEE;
             font-family: sans-serif;
         }
+
         h1, h2, h3, p {
             color: #EEE;
         }
@@ -26,16 +27,39 @@
 <div id="demo"></div>
 
 <script type="module">
-    import { html, render } from 'lit';
-    import './dist/src/ai-taxonomist.js';
+    import { html, render } from 'lit'
+    import './dist/src/ai-taxonomist.js'
 
-    const apiUrl = 'http://localhost:3000/v2/identify/all';
+    document.addEventListener('aiTaxonomistAttachmentsClick', (e) => {
+        console.log("Attachments clicked", e.detail)
+        alert('Attachments clicked: ' + e.detail.speciesName)
+    })
+
+    const apiUrl = 'http://localhost:3000/v2/identify/all'
     render(
         html`
-        <ai-taxonomist .apiUrl=${apiUrl} .allowPlantNetBranding=${true}></ai-taxonomist>
-      `,
+            <template id="aitaxonomist-attachments-template">
+                <style>
+                    button {
+                        border: 1px solid #8888FF;
+                        background: transparent;
+                        color: #8888FF;
+                        border-radius: 30px;
+                        cursor: pointer;
+                        margin-top: 24px;
+                    }
+                    button:hover {
+                        filter: brightness(1.2);
+                    }
+                </style>
+                <button>SELECT SPECIES</button>
+            </template>
+
+            <ai-taxonomist .apiUrl=${apiUrl} .allowPlantNetBranding=${true}>
+            </ai-taxonomist>
+        `,
         document.querySelector('#demo')
-    );
+    )
 </script>
 </body>
 </html>

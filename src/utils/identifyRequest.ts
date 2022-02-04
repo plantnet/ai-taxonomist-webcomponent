@@ -1,5 +1,4 @@
-import { IdentifyErrorResponse, IdentifySuccessResponse, Result } from './types.js'
-import { ResultType } from '../TaxonResults.js'
+import { IdentifyErrorResponse, IdentifySuccessResponse, ServerResult, ResultType } from './types.js'
 import { getBrowserLang } from './getBrowserLang.js'
 
 export const identifyRequest = async (
@@ -33,7 +32,7 @@ export const identifyRequest = async (
             return responseJson.message
         }
 
-        return responseJson.results.map((result: Result) => ({
+        return responseJson.results.map((result: ServerResult) => ({
             score: result.score,
             speciesName: result.species.scientificNameWithoutAuthor,
             author: result.species.scientificNameAuthorship,
