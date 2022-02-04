@@ -11,6 +11,8 @@
 
 ---
 
+_⚠️ Currently in a "beta" of some sort_ 
+    
 # \<ai-taxonomist>
 
 A WebComponent within AI-Taxonomist project to identify plants|frog|anything in any web pages. 
