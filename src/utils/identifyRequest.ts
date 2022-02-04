@@ -41,7 +41,7 @@ export const identifyRequest = async (
             gbifUrl: result.gbif ? `https://www.gbif.org/species/${result.gbif.id}` : null,
             images: result.images
                 .map(image => ({
-                    url: image.url.o,
+                    url: image.url.m,
                     alt: `${image.citation} - ${image.date.string}`,
                 }))
                 .slice(0, 3),

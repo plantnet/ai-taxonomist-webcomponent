@@ -53,7 +53,7 @@ This WebComponent follows the [open-wc](https://github.com/open-wc/open-wc) reco
 - **`apiKey`**: the API key to use, if not added by the server. On Pl@ntNet API you currently cannot use the apiKey directly due to CORS being checked (so you need to add a proxy at least, cf `server` nginx config).   
     Example for Pl@ntNet:  
     ```
-    <ai-taxonomist apiUrl="https://my-api.plantnet.org" apiKey="XXXXXXXXX"></ai-taxonomist>
+    <ai-taxonomist apiUrl="https://my-api.plantnet.org/v2/identify/all" apiKey="XXXXXXXXX"></ai-taxonomist>
     ```
 - **`maxImages`**: The number of images the user can upload for a single identification, default to 5. 
 - **`allowPlantNetBranding`**: (default: true) if true, the component will display the PlantNet logo and the link to the PlantNet website. 
