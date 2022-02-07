@@ -21,8 +21,9 @@ This WebComponent follows the [open-wc](https://github.com/open-wc/open-wc) reco
 
 ## Demo
 
-<p align="center">
-    <a href="https://plantnet.org/ai-taxonomist-demo/" target="_blank">plantnet.org/ai-taxonomist-demo/</a>
+<b>DEMO: <a href="https://plantnet.org/ai-taxonomist-demo/" target="_blank">plantnet.org/ai-taxonomist-demo/</a></b>
+    <p align="center">
+    
   <img src="/demo.gif" alt="Demo of the Web Component" />
 </p>
 
