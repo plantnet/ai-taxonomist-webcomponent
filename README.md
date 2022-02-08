@@ -27,24 +27,29 @@ This WebComponent follows the [open-wc](https://github.com/open-wc/open-wc) reco
   <img src="/demo.gif" alt="Demo of the Web Component" />
 </p>
 
-## Usage
+## Recommanded usage
 
-1. Setup server: 
-    This part is necessary to use the [WebComponent](https://developer.mozilla.org/docs/Web/Web_Components) on PlantNet API but your usage may vary if you host your own API.    
-    - Build the nginx docker image: `docker build -t nginx-ai-taxo -f Dockerfile --build-arg APIKEY=XXXX .`  Don't forget to get your API key on [PlantNet API](https://my.plantnet.org/).
-    - Run the nginx docker image: `docker run -it -d -p 3000:80 nginx-ai-taxo`
-
-2. There is several ways to use the web components: 
-    1. Within a **web page in html** (example: a WordPress or a static website)
+1. Get an API Key for [Pl@ntNet here](https://my.plantnet.org/).
+2. Allow the domains on your Pl@ntNet account, for `http://localhost:8000` for development or  `https://example.com` for production website [here](https://my.plantnet.org/account/settings).
+3. There is several ways to use the web components: 
+    1. Within a **web page in HTML** (example: a WordPress or a static website)
     ```html
     <script src="https://unpkg.com/ai-taxonomist/dist/src/index.js?module" type="module"></script>
-    <ai-taxonomist serverUrl="http://localhost:3000"></ai-taxonomist>
+    <ai-taxonomist apiKey="YOUR_API_KEY"></ai-taxonomist>
     ```
    2. Within a **JavaScript project (React, Vue, Svelte, Angular, etc)**: 
        - a. Install the package: `npm i ai-taxonomist`
        - b. Import the package: `import 'ai-taxonomist';`
-       - c. Add the component: `<ai-taxonomist></ai-taxonomist>`
+       - c. Add the component: `<ai-taxonomist apiKey="YOUR_API_KEY"></ai-taxonomist>`
 
+### Advanced usage
+
+You can also use your own server, for this you can specify the server endpoint like so: 
+```
+    <ai-taxonomist apiUrl="https://api.example.com/v2/identify" apiKey="XXXXXXXXX"></ai-taxonomist>    
+```
+
+    
 ### Options
 
 
