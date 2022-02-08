@@ -10,8 +10,6 @@
 </h3>
 
 ---
-
-_⚠️ Currently in a "beta" of some sort_ 
     
 # \<ai-taxonomist>
 
@@ -30,8 +28,8 @@ This WebComponent follows the [open-wc](https://github.com/open-wc/open-wc) reco
 ## Recommanded usage
 
 1. Get an API Key for [Pl@ntNet here](https://my.plantnet.org/).
-2. Allow the domains on your Pl@ntNet account, for `http://localhost:8000` for development or  `https://example.com` for production website [here](https://my.plantnet.org/account/settings).
-3. There is several ways to use the web components: 
+2. Allow the domains on your Pl@ntNet account, for `http://localhost:8000` for local development or  `https://example.com` for production website [here](https://my.plantnet.org/account/settings).
+3. There are several ways to use the web components: 
     1. Within a **web page in HTML** (example: a WordPress or a static website)
     ```html
     <script src="https://unpkg.com/ai-taxonomist/dist/src/index.js?module" type="module"></script>
