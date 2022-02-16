@@ -85,7 +85,7 @@ You can also use your own server, for this you can specify the server endpoint l
         alert('Attachments clicked: ' + e.detail.speciesName)
     })
     ```
-    The detail will contain the properties listed [here](https://github.com/plantnet/ai-taxonomist/blob/main/src/utils/types.ts#L45). 
+    The detail will contain the properties listed [on ResultType](https://github.com/plantnet/ai-taxonomist/blob/main/src/utils/types.ts#L47). 
   
   
 
