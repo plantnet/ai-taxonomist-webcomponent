@@ -210,6 +210,8 @@ export class TaxonResults extends LitElement {
             width: 100px;
             marginleft: 12px;
             border-radius: 4px;
+            background: var(--ai-taxonomist-background);
+            color: transparent;
         }
 
         @media only screen and (max-width: 48em) {
@@ -371,7 +373,9 @@ export class TaxonResults extends LitElement {
                                 <div class="col imgContainer">
                                     ${result.images.map(
                                         image => html`
-                                            <img src="${image.url}" alt="${image.alt}" title="${image.alt}" />
+                                            <a href="${image.url}" title="${image.alt}" target="_blank"
+                                                ><img src="${image.url}" alt="${image.alt}"
+                                            /></a>
                                         `
                                     )}
                                 </div>
