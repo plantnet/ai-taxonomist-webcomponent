@@ -14,19 +14,23 @@
             display: flex;
             flex-direction: row;
             justify-content: center;
-            margin-top: 12px;
         }
         #logos img {
             margin: 12px;
         }
 
         body {
+            padding: 12px 12px;
             background: #eee;
             color: #000;
             font-family: sans-serif;
             max-width: 1000px;
-            text-align: center;
             margin: auto;
+        }
+
+        #header {
+            margin-bottom: 20px;
+            text-align: center;
         }
 
         a {
@@ -34,20 +38,40 @@
             text-decoration: none;
         }
 
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                color: #eee;
+                background: #333;
+            }
+            a {
+                color: #77F;
+                text-decoration: none;
+            }
+
+            #logos {
+                background: #DDD;
+                box-shadow: 0 0 8px 8px #DDD;
+                margin-bottom: 40px;
+            }
+        }
+
     </style>
 </head>
 <body>
 
-    <div id="logos">
-        <img src="https://plantnet.org/wp-content/uploads/2021/07/plantnet_full.svg" alt="Pl@ntNet logo" width="150">
-        <img src="https://cos4cloud-eosc.eu/wp-content/uploads/2020/07/logo-cos4cloud-middle.png" alt="Pl@ntNet logo" width="150">
+
+    <div id="header">
+        <div id="logos">
+            <img src="https://plantnet.org/wp-content/uploads/2021/07/plantnet_full.svg" alt="Pl@ntNet logo" width="150">
+            <img src="https://cos4cloud-eosc.eu/wp-content/uploads/2020/07/logo-cos4cloud-middle.png" alt="Pl@ntNet logo" width="150">
+        </div>
+
+        <p><a href="https://cos4cloud-eosc.eu/services/ai-taxonomist/">AI Taxonomist</a> demo using C4C backend trained on <b>frogs</b> dataset.</p>
+        <a href="https://github.com/plantnet/ai-taxonomist-webcomponent" title="WebComponent GitHub" target="_blank">WebComponent repository</a>
     </div>
 
-    <p><a href="https://cos4cloud-eosc.eu/services/ai-taxonomist/">AI Taxonomist</a> demo using C4C backend trained on <b>frogs</b> dataset.</p>
-    <a href="https://github.com/plantnet/ai-taxonomist-webcomponent" title="WebComponent GitHub">WebComponent repository</a>
-
-    <ai-taxonomist apiUrl="https://c4c.inria.fr/ai-taxonomist/identify" backendFormat="c4c" .allowPlantNetBranding=${true}>
-    </ai-taxonomist>
-
+    <script src="https://unpkg.com/ai-taxonomist/dist/src/index.js?module" type="module"></script>
+    <ai-taxonomist apiUrl="https://c4c.inria.fr/ai-taxonomist/identify" backendFormat="c4c" > <center>Loading...</center></ai-taxonomist>
 </body>
 </html>

@@ -210,11 +210,8 @@ export class TaxonResults extends LitElement {
             width: 100px;
             marginleft: 12px;
             border-radius: 4px;
-        }
-
-        a {
-            margin-top: 12px;
-            color: var(--ai-taxonomist-accent-color);
+            background: var(--ai-taxonomist-background);
+            color: transparent;
         }
 
         @media only screen and (max-width: 48em) {
@@ -304,8 +301,6 @@ export class TaxonResults extends LitElement {
 
     @property({ type: Boolean }) plantnetBrand: boolean = false
 
-    @property({ type: String }) doiUrl: string | null = null
-
     onAttachmentClick(result: ResultType) {
         return (e: Event) => {
             e.preventDefault()
@@ -332,8 +327,6 @@ export class TaxonResults extends LitElement {
             this.results.length > maxResults
                 ? html`<p>${this.results.length - maxResults} more results not displayed</p>`
                 : null
-
-        const doiLink = this.doiUrl ? html`<a href="${this.doiUrl}" target="_blank">GBIF DOI</a>` : null
 
         return html`
             <div class="container">
@@ -380,7 +373,9 @@ export class TaxonResults extends LitElement {
                                 <div class="col imgContainer">
                                     ${result.images.map(
                                         image => html`
-                                            <img src="${image.url}" alt="${image.alt}" title="${image.alt}" />
+                                            <a href="${image.url}" title="${image.alt}" target="_blank"
+                                                ><img src="${image.url}" alt="${image.alt}"
+                                            /></a>
                                         `
                                     )}
                                 </div>
@@ -388,7 +383,7 @@ export class TaxonResults extends LitElement {
                         `
                     )}
                 </ul>
-                ${hasExtraResults} ${doiLink}
+                ${hasExtraResults}
             </div>
         `
     }
