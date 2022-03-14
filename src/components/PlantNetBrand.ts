@@ -22,9 +22,11 @@ export class PlantNetBrand extends LitElement {
 
     connectedCallback() {
         super.connectedCallback()
+        const aiTaxonomistRootNodeClassList = (this.getRootNode() as any).host.parentNode.getRootNode().host.classList
+        const hasPreferDarkClass = aiTaxonomistRootNodeClassList.contains('prefer-dark')
+        const hasPreferLightClass = aiTaxonomistRootNodeClassList.contains('prefer-light')
         this.darkMode =
-            (this.getRootNode() as any).host.classList.contains('prefer-dark') ||
-            window.matchMedia('(prefers-color-scheme: dark)').matches
+            hasPreferDarkClass || (!hasPreferLightClass && window.matchMedia('(prefers-color-scheme: dark)').matches)
     }
 
     render() {
