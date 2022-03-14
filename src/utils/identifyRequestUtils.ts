@@ -49,7 +49,7 @@ export const formatPlantNetResponse = async (response: Response): Promise<Result
 
     return responseJson.results.map((result: ServerResult) => ({
         score: result.score,
-        speciesName: result.species.scientificNameWithoutAuthor,
+        taxonName: result.species.scientificNameWithoutAuthor,
         author: result.species.scientificNameAuthorship,
         family: result.species.family.scientificName,
         commonNames: result.species.commonNames,
@@ -74,7 +74,7 @@ export const formatC4CResponse = async (response: Response): Promise<ResultType[
 
     return responseJsonResults.map((result: C4CServerResult) => ({
         score: result.score,
-        speciesName: result.name,
+        taxonName: result.name,
         author: result.authorship,
         family: result.family,
         commonNames: [result.vernacularName],

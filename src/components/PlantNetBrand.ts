@@ -22,7 +22,9 @@ export class PlantNetBrand extends LitElement {
 
     connectedCallback() {
         super.connectedCallback()
-        this.darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+        this.darkMode =
+            (this.getRootNode() as any).host.classList.contains('prefer-dark') ||
+            window.matchMedia('(prefers-color-scheme: dark)').matches
     }
 
     render() {
