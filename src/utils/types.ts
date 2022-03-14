@@ -51,7 +51,7 @@ export type ImageType = {
 }
 export type ResultType = {
     score: number
-    speciesName: string
+    taxonName: string
     author: string
     family: string
     commonNames: string[]

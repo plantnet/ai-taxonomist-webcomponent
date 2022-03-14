@@ -350,7 +350,7 @@ export class TaxonResults extends LitElement {
                                     <div>${round(result.score * 100)}%</div>
                                 </div>
                                 <div class="col col-text species">
-                                    <p class="speciesName">${result.speciesName} <span>${result.author}</span></p>
+                                    <p class="speciesName">${result.taxonName} <span>${result.author}</span></p>
                                     <p>${result.commonNames[0]}</p>
                                     ${template
                                         ? html`<div
