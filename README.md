@@ -50,7 +50,7 @@ You can also use your own server, for this you can specify the server endpoint l
     
 ### Options
 
-
+- **`backendFormat`**: (default: `pn`) backend format of the API: `pn` (PlantNet) or `c4c` (Cos4Cloud)
 - **`apiUrl`**: (default: `https://my-api.plantnet.org/v2/identify/all`) the server url to call, either local or remote  
     Example with a Local url (the server will need to add the API key):  
     ```

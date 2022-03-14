@@ -5,8 +5,8 @@ import './image-selected.js'
 import './taxon-results.js'
 import './components/ai-reset-button.js'
 import { ImagePickEvent } from './ImagePicker.js'
-import { identifyRequest } from './utils/identifyRequest.js'
-import { ResultType } from './utils/types.js'
+import { getGBIFDoi, identifyRequest } from './utils/identifyRequest.js'
+import { BackendFormat, ResultType } from './utils/types.js'
 
 enum IdentifyState {
     Idle,
@@ -19,10 +19,12 @@ const INIT_IDENTIFY_STATE: {
     state: IdentifyState
     error: string | null
     results: ResultType[]
+    doiUrl: string | null
 } = {
     state: IdentifyState.Idle,
     error: null,
     results: [],
+    doiUrl: null,
 }
 
 export class AiTaxonomist extends LitElement {
@@ -94,11 +96,16 @@ export class AiTaxonomist extends LitElement {
 
     @property({ type: Boolean }) isPlantNetBranded: boolean = false
 
+    @property({ type: String }) backendFormat: BackendFormat = BackendFormat.PLANTNET
+
     @property({ attribute: false }) identify = { ...INIT_IDENTIFY_STATE }
 
     connectedCallback() {
         super.connectedCallback()
-        if (this.allowPlantNetBranding && this.apiUrl.includes('https://my-api.plantnet.org')) {
+        if (
+            this.allowPlantNetBranding &&
+            (this.apiUrl.includes('https://my-api.plantnet.org') || this.apiUrl.includes('https://c4c.inria.fr'))
+        ) {
             this.isPlantNetBranded = true
         }
     }
@@ -136,7 +143,8 @@ export class AiTaxonomist extends LitElement {
         this.identify.error = null
         this.identify.state = IdentifyState.Loading
 
-        const response = await identifyRequest(this.imageFiles, this.apiUrl, this.apiKey)
+        const response = await identifyRequest(this.imageFiles, this.apiUrl, this.apiKey, this.backendFormat)
+        const doiUrl = await getGBIFDoi(this.backendFormat)
 
         if (typeof response === 'string') {
             this.identify.state = IdentifyState.Error
@@ -144,6 +152,7 @@ export class AiTaxonomist extends LitElement {
         } else {
             this.identify.state = IdentifyState.Loaded
             this.identify.results = response
+            this.identify.doiUrl = doiUrl
         }
         this.requestUpdate()
     }
@@ -173,6 +182,7 @@ export class AiTaxonomist extends LitElement {
                     <taxon-results
                         .results=${this.identify.results}
                         .error=${this.identify.error}
+                        .doiUrl=${this.identify.doiUrl}
                         ?loading=${this.identify.state === IdentifyState.Loading}
                         ?plantnetBrand=${this.isPlantNetBranded}
                     ></taxon-results>

@@ -1,3 +1,8 @@
+export enum BackendFormat {
+    PLANTNET = 'pn',
+    C4C = 'c4c',
+}
+
 export type ServerResult = {
     gbif: {
         id: string
@@ -52,4 +57,27 @@ export type ResultType = {
     commonNames: string[]
     images: ImageType[]
     gbifUrl: string | null
+}
+
+// Cos4Cloud backend formats
+export type C4CServerResult = {
+    name: string
+    score: number
+    gbif_id: string
+    authorship: string
+    vernacularName: string
+    genus: string
+    family: string
+    images: {
+        url: string
+        license: string
+        rightsHolder: string
+        publisher: string
+    }[]
+}
+export type IdentifyC4CSuccessResponse = {
+    results: C4CServerResult[]
+}
+export type IdentifyC4CErrorResponse = {
+    status: string
 }
