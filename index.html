@@ -58,7 +58,9 @@
                 <button>SELECT SPECIES</button>
             </template>
 
-            <ai-taxonomist .apiUrl=${apiUrl} .allowPlantNetBranding=${true}>
+            <ai-taxonomist .apiUrl=${apiUrl} .allowPlantNetBranding=${true} class="prefer-light">
+            </ai-taxonomist>
+            <ai-taxonomist .apiUrl=${apiUrl} .allowPlantNetBranding=${true} class="prefer-dark">
             </ai-taxonomist>
         `,
         document.querySelector('#demo')

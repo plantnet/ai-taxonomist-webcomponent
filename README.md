@@ -20,8 +20,7 @@ This WebComponent follows the [open-wc](https://github.com/open-wc/open-wc) reco
 ## Demo
 
 <b>DEMO: <a href="https://plantnet.org/ai-taxonomist-demo/" target="_blank">plantnet.org/ai-taxonomist-demo/</a></b>
-    <p align="center">
-    
+<p align="center">
   <img src="/demo.gif" alt="Demo of the Web Component" />
 </p>
 
@@ -50,7 +49,6 @@ You can also use your own server, for this you can specify the server endpoint l
     
 ### Options
 
-- **`backendFormat`**: (default: `pn`) backend format of the API: `pn` (PlantNet) or `c4c` (Cos4Cloud)
 - **`apiUrl`**: (default: `https://my-api.plantnet.org/v2/identify/all`) the server url to call, either local or remote  
     Example with a Local url (the server will need to add the API key):  
     ```
@@ -61,6 +59,7 @@ You can also use your own server, for this you can specify the server endpoint l
     ```
     <ai-taxonomist apiUrl="https://my-api.plantnet.org/v2/identify/all" apiKey="XXXXXXXXX"></ai-taxonomist>
     ```
+- **`backendFormat`**: (default: `pn`) backend format of the API: `pn` (PlantNet) or `c4c` (Cos4Cloud)
 - **`maxImages`**: The number of images the user can upload for a single identification, default to 5. 
 - **`allowPlantNetBranding`**: (default: true) if true, the component will display the PlantNet logo and the link to the PlantNet website. 
 - **Attachments**: You can attach HTML elements to each result, for example if you want to let the user select the correct taxon. This can be achieve using an HTML `<template>` as follows: 
@@ -86,8 +85,11 @@ You can also use your own server, for this you can specify the server endpoint l
     })
     ```
     The detail will contain the properties listed [on ResultType](https://github.com/plantnet/ai-taxonomist/blob/main/src/utils/types.ts#L47). 
-  
-  
+
+### Styling
+
+- Dark Mode: you can override dark mode by specifying either `prefer-dark` or `prefer-light` in the `<ai-taxonomist>` class element. Doing so will either force the dark/light mode to stay in dark/light mode no matter what the user preference is.
+
 
 ## Development / contributions
 

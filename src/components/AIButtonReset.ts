@@ -27,14 +27,8 @@ export class AIButtonReset extends LitElement {
         }
 
         button svg {
-            fill: #535559;
+            fill: var(--ai-taxonomist-text-color);
             margin-right: 0.2rem;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            button svg {
-                fill: #ccc;
-            }
         }
 
         @media only screen and (max-width: 48em) {

@@ -22,14 +22,14 @@ export class ImagePicker extends LitElement {
             display: block;
             padding: 25px;
             border-radius: 4px;
-            outline: 2px dashed #92b0b3;
+            outline: 2px dashed var(--ai-taxonomist-outline);
             outline-offset: -2px;
             transition: outline-offset 0.15s ease-in-out, background-color 0.15s linear;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #eee;
+            background-color: var(--ai-taxonomist-background);
         }
 
         file-drop span {
@@ -42,9 +42,8 @@ export class ImagePicker extends LitElement {
 
         file-drop.drop-valid label,
         label:hover {
-            background-color: green;
             outline-offset: -15px;
-            background-color: #ddd;
+            background-color: var(--ai-taxonomist-background-hover);
         }
 
         file-drop.drop-invalid label {
@@ -55,21 +54,6 @@ export class ImagePicker extends LitElement {
             margin-top: 6px;
             display: flex;
             justify-content: flex-end;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            file-drop label {
-                outline-color: #888;
-                background-color: #666;
-            }
-
-            file-drop label:hover {
-                background-color: #333;
-            }
-
-            file-drop.inline label svg {
-                filter: brightness(20) opacity(0.7);
-            }
         }
     `
 

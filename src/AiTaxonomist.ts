@@ -1,4 +1,4 @@
-import { html, css, LitElement } from 'lit'
+import { html, css, LitElement, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
 import './image-picker.js'
 import './image-selected.js'
@@ -27,14 +27,40 @@ const INIT_IDENTIFY_STATE: {
     doiUrl: null,
 }
 
+const lightColors = {
+    text: '#535559',
+    border: '#ccc',
+    outline: '#92b0b3',
+    background: '#eee',
+    backgroundHover: '#ddd',
+}
+const darkColors = {
+    text: '#ccc',
+    border: '#666',
+    outline: '#888',
+    background: '#666',
+    backgroundHover: '#999',
+}
+
 export class AiTaxonomist extends LitElement {
     static styles = css`
         :host {
             display: block;
-            color: var(--ai-taxonomist-text-color, #535559);
-            --ai-taxonomist-separator-border-color: #ccc;
+            --ai-taxonomist-text-color: ${unsafeCSS(lightColors.text)};
+            --ai-taxonomist-separator-border-color: ${unsafeCSS(lightColors.border)};
             --ai-taxonomist-accent-color: #8eb533;
+            --ai-taxonomist-outline: ${unsafeCSS(lightColors.outline)};
+            --ai-taxonomist-background: ${unsafeCSS(lightColors.background)};
+            --ai-taxonomist-background-hover: ${unsafeCSS(lightColors.backgroundHover)};
+            color: var(--ai-taxonomist-text-color);
             font-size: 1.1rem;
+        }
+        :host(.prefer-dark) {
+            --ai-taxonomist-text-color: ${unsafeCSS(darkColors.text)};
+            --ai-taxonomist-separator-border-color: ${unsafeCSS(darkColors.border)};
+            --ai-taxonomist-outline: ${unsafeCSS(darkColors.outline)};
+            --ai-taxonomist-background: ${unsafeCSS(darkColors.background)};
+            --ai-taxonomist-background-hover: ${unsafeCSS(darkColors.backgroundHover)};
         }
 
         .innerContainer {
@@ -58,22 +84,13 @@ export class AiTaxonomist extends LitElement {
             margin-left: calc(16.6667% + 0.2rem);
         }
 
-        button:hover {
-            filter: brightness(80%);
-        }
-
-        button svg {
-            fill: #535559;
-            margin-right: 0.2rem;
-        }
-
         @media (prefers-color-scheme: dark) {
-            :host {
-                --ai-taxonomist-separator-border-color: #666;
-                color: var(--ai-taxonomist-text-color, #ccc);
-            }
-            button svg {
-                fill: #ccc;
+            :host(:not(.prefer-light)) {
+                --ai-taxonomist-text-color: ${unsafeCSS(darkColors.text)};
+                --ai-taxonomist-separator-border-color: ${unsafeCSS(darkColors.border)};
+                --ai-taxonomist-outline: ${unsafeCSS(darkColors.outline)};
+                --ai-taxonomist-background: ${unsafeCSS(darkColors.background)};
+                --ai-taxonomist-background-hover: ${unsafeCSS(darkColors.backgroundHover)};
             }
         }
 
