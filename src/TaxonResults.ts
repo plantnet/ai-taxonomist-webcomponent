@@ -299,6 +299,8 @@ export class TaxonResults extends LitElement {
 
     @property({ type: Boolean }) plantnetBrand: boolean = false
 
+    @property({ type: String }) doiUrl: string | null = null
+
     onAttachmentClick(result: ResultType) {
         return (e: Event) => {
             e.preventDefault()
@@ -325,6 +327,8 @@ export class TaxonResults extends LitElement {
             this.results.length > maxResults
                 ? html`<p>${this.results.length - maxResults} more results not displayed</p>`
                 : null
+
+        const doiLink = this.doiUrl ? html`<a href="${this.doiUrl}" target="_blank">DOI</a>` : null
 
         return html`
             <div class="container">
@@ -379,7 +383,7 @@ export class TaxonResults extends LitElement {
                         `
                     )}
                 </ul>
-                ${hasExtraResults}
+                ${hasExtraResults} ${doiLink}
             </div>
         `
     }
