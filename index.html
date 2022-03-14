@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>AI Taxonomist</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
     <style>
         body {
             background: #FEFEFE;
@@ -58,6 +59,9 @@
             </template>
 
             <ai-taxonomist .apiUrl=${apiUrl} .allowPlantNetBranding=${true}>
+            </ai-taxonomist>
+
+            <ai-taxonomist apiUrl="http://localhost:3001/ai-taxonomist/identify" backendFormat="c4c" .allowPlantNetBranding=${true}>
             </ai-taxonomist>
         `,
         document.querySelector('#demo')
