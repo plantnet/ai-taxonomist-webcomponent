@@ -212,11 +212,6 @@ export class TaxonResults extends LitElement {
             border-radius: 4px;
         }
 
-        a {
-            margin-top: 12px;
-            color: var(--ai-taxonomist-accent-color);
-        }
-
         @media only screen and (max-width: 48em) {
             .col-text {
                 padding-top: 0;
@@ -304,8 +299,6 @@ export class TaxonResults extends LitElement {
 
     @property({ type: Boolean }) plantnetBrand: boolean = false
 
-    @property({ type: String }) doiUrl: string | null = null
-
     onAttachmentClick(result: ResultType) {
         return (e: Event) => {
             e.preventDefault()
@@ -332,8 +325,6 @@ export class TaxonResults extends LitElement {
             this.results.length > maxResults
                 ? html`<p>${this.results.length - maxResults} more results not displayed</p>`
                 : null
-
-        const doiLink = this.doiUrl ? html`<a href="${this.doiUrl}" target="_blank">GBIF DOI</a>` : null
 
         return html`
             <div class="container">
@@ -388,7 +379,7 @@ export class TaxonResults extends LitElement {
                         `
                     )}
                 </ul>
-                ${hasExtraResults} ${doiLink}
+                ${hasExtraResults}
             </div>
         `
     }

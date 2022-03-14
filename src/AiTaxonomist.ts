@@ -4,6 +4,7 @@ import './image-picker.js'
 import './image-selected.js'
 import './taxon-results.js'
 import './components/ai-reset-button.js'
+import './components/ai-footer.js'
 import { ImagePickEvent } from './ImagePicker.js'
 import { getGBIFDoi, identifyRequest } from './utils/identifyRequest.js'
 import { BackendFormat, ResultType } from './utils/types.js'
@@ -19,12 +20,10 @@ const INIT_IDENTIFY_STATE: {
     state: IdentifyState
     error: string | null
     results: ResultType[]
-    doiUrl: string | null
 } = {
     state: IdentifyState.Idle,
     error: null,
     results: [],
-    doiUrl: null,
 }
 
 const lightColors = {
@@ -117,6 +116,8 @@ export class AiTaxonomist extends LitElement {
 
     @property({ attribute: false }) identify = { ...INIT_IDENTIFY_STATE }
 
+    @property({ attribute: false }) doiUrl: string | null = null
+
     connectedCallback() {
         super.connectedCallback()
         if (
@@ -125,6 +126,9 @@ export class AiTaxonomist extends LitElement {
         ) {
             this.isPlantNetBranded = true
         }
+        ;(async () => {
+            this.doiUrl = await getGBIFDoi(this.backendFormat)
+        })()
     }
 
     __addImages(e: ImagePickEvent) {
@@ -161,7 +165,6 @@ export class AiTaxonomist extends LitElement {
         this.identify.state = IdentifyState.Loading
 
         const response = await identifyRequest(this.imageFiles, this.apiUrl, this.apiKey, this.backendFormat)
-        const doiUrl = await getGBIFDoi(this.backendFormat)
 
         if (typeof response === 'string') {
             this.identify.state = IdentifyState.Error
@@ -169,7 +172,6 @@ export class AiTaxonomist extends LitElement {
         } else {
             this.identify.state = IdentifyState.Loaded
             this.identify.results = response
-            this.identify.doiUrl = doiUrl
         }
         this.requestUpdate()
     }
@@ -183,6 +185,7 @@ export class AiTaxonomist extends LitElement {
                         @imagepick=${this.__addImages}
                         ?plantnetBrand=${this.isPlantNetBranded}
                     ></image-picker>
+                    <ai-footer .doiUrl=${this.doiUrl}></ai-footer>
                 `
             case IdentifyState.Loading:
             case IdentifyState.Error:
@@ -193,17 +196,15 @@ export class AiTaxonomist extends LitElement {
                         .canAddImages=${this.imageFiles.length < this.maxImages}
                         @addimage=${this.__addImages}
                         @removeimage=${this.__removeImage}
-                    >
-                        ></image-selected
-                    >
+                    ></image-selected>
                     <taxon-results
                         .results=${this.identify.results}
                         .error=${this.identify.error}
-                        .doiUrl=${this.identify.doiUrl}
                         ?loading=${this.identify.state === IdentifyState.Loading}
                         ?plantnetBrand=${this.isPlantNetBranded}
                     ></taxon-results>
                     <ai-button-reset @press=${this.reset}>New identification</ai-button-reset>
+                    <ai-footer .doiUrl=${this.doiUrl}></ai-footer>
                 `
         }
     }
