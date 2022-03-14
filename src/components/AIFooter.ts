@@ -25,7 +25,7 @@ export class AIFooter extends LitElement {
             return null
         }
 
-        return html`<a href="${this.doiUrl}" target="_blank"
+        return html`<a href="${this.doiUrl}" target="_blank" tile="Open GBIF DOI"
             >This identification engine has been trained on the GBIF Occurrence Download: ${this.doiUrl}</a
         >`
     }
