@@ -83,10 +83,10 @@ You can also use your own server, for this you can specify the server endpoint l
     You should NOT attach a click listener on your side. The AiTaxonomist component will listen for the click and fire a new event named `aiTaxonomistAttachmentsClick` which contain the selected taxon details in `event.detail`: 
     ```js
     document.addEventListener('aiTaxonomistAttachmentsClick', (e) => {
-        alert('Attachments clicked: ' + e.detail.speciesName)
+        alert('Attachments clicked: ' + e.detail.taxonName)
     })
     ```
-    The detail will contain the properties listed [on ResultType](https://github.com/plantnet/ai-taxonomist/blob/main/src/utils/types.ts#L47). 
+    The detail will contain the properties listed [on `ResultType`](https://github.com/plantnet/ai-taxonomist/blob/main/src/utils/types.ts#L47). 
 
 ### Styling
 
