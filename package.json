@@ -23,28 +23,27 @@
     "prepublish": "tsc && npm run analyze -- --exclude dist",
     "lint": "eslint --ext .ts,.html . --ignore-path .gitignore && prettier \"**/*.ts\" --check --ignore-path .gitignore",
     "format": "eslint --ext .ts,.html . --fix --ignore-path .gitignore && prettier \"**/*.ts\" --write --ignore-path .gitignore",
-    "storybook": "tsc && npm run analyze -- --exclude dist && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wds -c .storybook/server.mjs\"",
-    "storybook:build": "tsc && npm run analyze -- --exclude dist && build-storybook"
+    "prepare": "husky install",
+    "pre-commit": "lint-staged"
   },
   "dependencies": {
     "file-drop-element": "^1.0.1",
-    "lit": "^2.0.2"
+    "lit": "^2.2.0"
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.5.7",
     "@open-wc/eslint-config": "^7.0.0",
-    "@typescript-eslint/eslint-plugin": "^5.10.1",
-    "@typescript-eslint/parser": "^5.10.1",
-    "@web/dev-server": "^0.1.28",
-    "@web/dev-server-storybook": "next",
-    "concurrently": "^5.3.0",
-    "eslint": "^8.7.0",
-    "eslint-config-prettier": "^8.3.0",
-    "husky": "^4.3.8",
-    "lint-staged": "^10.5.4",
-    "prettier": "^2.4.1",
+    "@typescript-eslint/eslint-plugin": "^5.15.0",
+    "@typescript-eslint/parser": "^5.15.0",
+    "@web/dev-server": "^0.1.30",
+    "concurrently": "^7.0.0",
+    "eslint": "^8.11.0",
+    "eslint-config-prettier": "^8.5.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.5",
+    "prettier": "^2.5.1",
     "tslib": "^2.3.1",
-    "typescript": "^4.5.2"
+    "typescript": "^4.6.2"
   },
   "customElements": "custom-elements.json",
   "eslintConfig": {
@@ -80,11 +79,6 @@
     "arrowParens": "avoid",
     "printWidth": 120,
     "semi": false
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "*.ts": [
