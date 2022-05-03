@@ -7,7 +7,7 @@ import './components/ai-reset-button.js'
 import './components/ai-footer.js'
 import { ImagePickEvent } from './ImagePicker.js'
 import { getGBIFDoi, identifyRequest } from './utils/identifyRequest.js'
-import { BackendFormat, ResultType } from './utils/types.js'
+import { BackendFormat, Results } from './utils/types.js'
 
 enum IdentifyState {
     Idle,
@@ -19,11 +19,13 @@ enum IdentifyState {
 const INIT_IDENTIFY_STATE: {
     state: IdentifyState
     error: string | null
-    results: ResultType[]
+    results: Results
 } = {
     state: IdentifyState.Idle,
     error: null,
-    results: [],
+    results: {
+        results: [],
+    },
 }
 
 const lightColors = {

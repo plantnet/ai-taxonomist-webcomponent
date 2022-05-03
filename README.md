@@ -61,7 +61,7 @@ You can also use your own server, for this you can specify the server endpoint l
     ```
     <ai-taxonomist apiUrl="https://my-api.plantnet.org/v2/identify/all" apiKey="XXXXXXXXX"></ai-taxonomist>
     ```
-- **`backendFormat`**: (default: `pn`) backend format of the API: `pn` (PlantNet) or `c4c` (Cos4Cloud)
+- **`backendFormat`**: (default: `pn`) backend format of the API: `pn` (PlantNet), `c4c` (Cos4Cloud) or `carp`  (CARPESO)
 - **`maxImages`**: The number of images the user can upload for a single identification, default to 5. 
 - **`allowPlantNetBranding`**: (default: true) if true, the component will display the PlantNet logo and the link to the PlantNet website. 
 - **Attachments**: You can attach HTML elements to each result, for example if you want to let the user select the correct taxon. This can be achieve using an HTML `<template>` as follows: 

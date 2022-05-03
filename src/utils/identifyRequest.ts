@@ -1,7 +1,9 @@
-import { BackendFormat, ResultType } from './types.js'
+import { BackendFormat, Results } from './types.js'
 import {
     formatC4CRequest,
     formatC4CResponse,
+    formatCarpersoResponse,
+    formatCarpesoRequest,
     formatPlantNetRequest,
     formatPlantNetResponse,
 } from './identifyRequestUtils.js'
@@ -18,6 +20,8 @@ const formatRequest = (
             return formatPlantNetRequest(images, apiUrl, apiKey)
         case BackendFormat.C4C:
             return formatC4CRequest(images, apiUrl, apiKey)
+        case BackendFormat.CARPESO:
+            return formatCarpesoRequest(images, apiUrl, apiKey)
     }
 }
 
@@ -26,7 +30,7 @@ export const identifyRequest = async (
     apiUrl: string,
     apiKey: string | null,
     backendFormat: BackendFormat
-): Promise<ResultType[] | string> => {
+): Promise<Results | string> => {
     const [form, url] = formatRequest(images, apiUrl, apiKey, backendFormat)
 
     try {
@@ -41,6 +45,8 @@ export const identifyRequest = async (
                 return formatPlantNetResponse(response)
             case BackendFormat.C4C:
                 return formatC4CResponse(response)
+            case BackendFormat.CARPESO:
+                return formatCarpersoResponse(response, apiUrl)
         }
     } catch (error: any) {
         return `Error: ${error.message}`
