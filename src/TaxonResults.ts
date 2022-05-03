@@ -3,7 +3,7 @@ import { property } from 'lit/decorators.js'
 import { round } from './utils/round.js'
 import './components/ai-loader.js'
 import { GBIF_LOGO } from './utils/icons.js'
-import { ResultType } from './utils/types.js'
+import { Results, ResultType } from './utils/types.js'
 
 export class TaxonResults extends LitElement {
     static styles = css`
@@ -82,6 +82,13 @@ export class TaxonResults extends LitElement {
             transform: translateY(-20px);
             animation: animateIn 0.3s forwards;
             animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+            transition: border-color 0.3s;
+            border-radius: 4px;
+            border-left: 5px solid transparent;
+        }
+
+        .result:hover {
+            border-color: var(--ai-taxonomist-accent-color);
         }
 
         .result:nth-child(1) {
@@ -125,7 +132,7 @@ export class TaxonResults extends LitElement {
 
         .score {
             padding-right: 0.5rem;
-            padding-left: 0.5rem;
+            padding-left: 0.2rem;
             flex-basis: 16.66666667%;
             max-width: 16.66666667%;
             margin-top: 5px;
@@ -293,7 +300,9 @@ export class TaxonResults extends LitElement {
         }
     `
 
-    @property({ attribute: false }) results: ResultType[] = []
+    @property({ attribute: false }) results: Results = {
+        results: [],
+    }
 
     @property({ type: Boolean }) error: string | null = null
 
@@ -320,33 +329,37 @@ export class TaxonResults extends LitElement {
         const template: HTMLTemplateElement | null = <HTMLTemplateElement>(
             document.getElementById('aitaxonomist-attachments-template')
         )
-        const loading = this.loading ? html`<ai-loader></ai-loader>` : null
+        const loading = this.loading ? html` <ai-loader></ai-loader>` : null
         const error = this.error ? html`<p>${this.error}</p>` : null
         const maxResults = 8
         const hasExtraResults =
-            this.results.length > maxResults
-                ? html`<p>${this.results.length - maxResults} more results not displayed</p>`
+            this.results.results.length > maxResults
+                ? html`<p>${this.results.results.length - maxResults} more results not displayed</p>`
                 : null
 
         return html`
             <div class="container">
                 <div class="separatorContainer">
                     <p class="title"><span>Results</span></p>
-                    ${this.plantnetBrand ? html`<plantnet-brand></plantnet-brand>` : ''}
+                    ${this.plantnetBrand ? html` <plantnet-brand></plantnet-brand>` : ''}
                 </div>
-                ${loading} ${error}
+                ${loading} ${error} ${this.results.overallScore ? html`<p><b>${this.results.overallScore}</b></p>` : ''}
                 <ul>
-                    ${this.results.slice(0, maxResults).map(
+                    ${this.results.results.slice(0, maxResults).map(
                         result => html`
                             <li class="result">
                                 <div class="col col-text score">
                                     <div>${round(result.score * 100)}%</div>
                                 </div>
                                 <div class="col col-text species">
-                                    <p class="speciesName">${result.taxonName} <span>${result.author}</span></p>
+                                    <p class="speciesName">
+                                        ${!result.formatTaxonName
+                                            ? html` <span>${result.taxonName}</span>`
+                                            : result.taxonName}<span> ${result.author}</span>
+                                    </p>
                                     <p>${result.commonNames[0]}</p>
                                     ${template
-                                        ? html`<div
+                                        ? html` <div
                                               @click=${this.onAttachmentClick(result)}
                                               @keyDown=${this.onAttachmentClick(result)}
                                           >
@@ -355,10 +368,11 @@ export class TaxonResults extends LitElement {
                                         : ''}
                                 </div>
                                 <div class="col col-text family">
-                                    <span title="${result.family}">${result.family}</span>
+                                    ${result.family ? html`<span title="${result.family}">${result.family}</span>` : ''}
                                     ${result.gbifUrl
                                         ? html`<a href="${result.gbifUrl}" target="_blank" class="gbif"
-                                              >${GBIF_LOGO}<svg
+                                              >${GBIF_LOGO}
+                                              <svg
                                                   xmlns="http://www.w3.org/2000/svg"
                                                   width="24"
                                                   height="24"
@@ -366,8 +380,9 @@ export class TaxonResults extends LitElement {
                                               >
                                                   <path
                                                       d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"
-                                                  /></svg
-                                          ></a>`
+                                                  />
+                                              </svg>
+                                          </a>`
                                         : null}
                                 </div>
                                 <div class="col imgContainer">

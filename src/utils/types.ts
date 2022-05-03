@@ -1,6 +1,7 @@
 export enum BackendFormat {
     PLANTNET = 'pn',
     C4C = 'c4c',
+    CARPESO = 'carp',
 }
 
 export type ServerResult = {
@@ -49,14 +50,21 @@ export type ImageType = {
     url: string
     alt: string
 }
+
 export type ResultType = {
     score: number
-    taxonName: string
-    author: string
-    family: string
+    taxonName: string | null
+    author: string | null
+    family: string | null
     commonNames: string[]
     images: ImageType[]
     gbifUrl: string | null
+    formatTaxonName: boolean
+}
+
+export type Results = {
+    overallScore?: string
+    results: ResultType[]
 }
 
 // Cos4Cloud backend formats
@@ -79,5 +87,25 @@ export type IdentifyC4CSuccessResponse = {
     results: C4CServerResult[]
 }
 export type IdentifyC4CErrorResponse = {
+    status: string
+}
+
+// Carpeso backend formats
+export type CarpesoServerResult = {
+    name: string
+    score: number
+    nutrition: number
+    images: {
+        url: string
+    }[]
+}
+export type IdentifyCarpesoSuccessResponse = {
+    status: string
+    results: {
+        nutrition: number
+        details: CarpesoServerResult[]
+    }
+}
+export type IdentifyCarpesoErrorResponse = {
     status: string
 }
