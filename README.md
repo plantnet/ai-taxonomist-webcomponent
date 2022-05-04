@@ -109,8 +109,14 @@ To scan the project for linting and formatting errors, run `npm run lint`
 
 To automatically fix linting and formatting errors, run `npm run format`
 
-### Demoing with Storybook
+### Release
+    
+Update the version: 
+```
+npm run major|minor|patch
+```
 
-To run a local instance of Storybook; run `npm run storybook`
-To build a production version of Storybook, run `npm run storybook:build`
-
+Publish the version pn NPM:
+```
+npm publish
+```
