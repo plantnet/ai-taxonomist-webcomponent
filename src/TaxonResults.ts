@@ -5,6 +5,11 @@ import './components/ai-loader.js'
 import { GBIF_LOGO } from './utils/icons.js'
 import { Results, ResultType } from './utils/types.js'
 
+const getDomainName = (url: string) => {
+    const domain = url.split('/')[2]
+    return domain.replace('www.', '')
+}
+
 export class TaxonResults extends LitElement {
     static styles = css`
         .container {
@@ -89,6 +94,7 @@ export class TaxonResults extends LitElement {
 
         .result:hover {
             border-color: var(--ai-taxonomist-accent-color);
+            z-index: 10;
         }
 
         .result:nth-child(1) {
@@ -171,7 +177,7 @@ export class TaxonResults extends LitElement {
             padding-left: 0.5rem;
         }
 
-        .family span {
+        .family span.familyName {
             text-align: left;
             font-style: italic;
             background-color: var(--ai-taxonomist-separator-border-color);
@@ -183,7 +189,8 @@ export class TaxonResults extends LitElement {
             display: block;
         }
 
-        .gbif {
+        .gbif,
+        .url {
             display: flex;
             align-items: center;
             width: 50px;
@@ -193,6 +200,23 @@ export class TaxonResults extends LitElement {
             background-color: var(--ai-taxonomist-separator-border-color);
             gap: 2px;
             transition: all 0.15s ease-in-out;
+            text-decoration: none;
+        }
+
+        .url {
+            width: 100%;
+        }
+
+        .url span {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            color: var(--ai-taxonomist-accent-color);
+        }
+
+        .gbif:hover,
+        .url:hover {
+            filter: brightness(80%);
         }
 
         .gbif:hover {
@@ -209,14 +233,28 @@ export class TaxonResults extends LitElement {
             margin-bottom: 6px;
         }
 
+        .imgLink {
+            display: flex;
+            z-index: 9;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            transform-origin: center;
+            border-radius: 4px;
+            margin-left: 12px;
+            overflow: hidden;
+        }
+        .imgLink:hover {
+            cursor: pointer;
+            transform: scale(3);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+
         .imgContainer img {
             object-position: center;
             object-fit: cover;
             aspect-ratio: 1;
             height: 100px;
             width: 100px;
-            marginleft: 12px;
-            border-radius: 4px;
             background: var(--ai-taxonomist-background);
             color: transparent;
         }
@@ -352,12 +390,15 @@ export class TaxonResults extends LitElement {
                                     <div>${round(result.score * 100)}%</div>
                                 </div>
                                 <div class="col col-text species">
-                                    <p class="speciesName">
-                                        ${!result.formatTaxonName
-                                            ? html` <span>${result.taxonName}</span>`
-                                            : result.taxonName}<span> ${result.author}</span>
-                                    </p>
+                                    ${result.taxonName
+                                        ? html`<p class="speciesName">
+                                              ${!result.formatTaxonName
+                                                  ? html` <span>${result.taxonName}</span>`
+                                                  : result.taxonName}<span> ${result.author}</span>
+                                          </p>`
+                                        : ''}
                                     <p>${result.commonNames[0]}</p>
+                                    ${result.additionalText ? html`<p>${result.additionalText}</p>` : ''}
                                     ${template
                                         ? html` <div
                                               @click=${this.onAttachmentClick(result)}
@@ -368,7 +409,11 @@ export class TaxonResults extends LitElement {
                                         : ''}
                                 </div>
                                 <div class="col col-text family">
-                                    ${result.family ? html`<span title="${result.family}">${result.family}</span>` : ''}
+                                    ${result.family
+                                        ? html`<span title="${result.family}" class="familyName"
+                                              >${result.family}</span
+                                          >`
+                                        : ''}
                                     ${result.gbifUrl
                                         ? html`<a href="${result.gbifUrl}" target="_blank" class="gbif"
                                               >${GBIF_LOGO}
@@ -384,12 +429,27 @@ export class TaxonResults extends LitElement {
                                               </svg>
                                           </a>`
                                         : null}
+                                    ${result.url
+                                        ? html`<a href="${result.url}" target="_blank" class="url"
+                                              ><span>${getDomainName(result.url)}</span
+                                              ><svg
+                                                  xmlns="http://www.w3.org/2000/svg"
+                                                  width="24"
+                                                  height="24"
+                                                  viewBox="0 0 24 24"
+                                              >
+                                                  <path
+                                                      d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"
+                                                  />
+                                              </svg>
+                                          </a>`
+                                        : null}
                                 </div>
                                 <div class="col imgContainer">
                                     ${result.images.map(
                                         image => html`
-                                            <a href="${image.url}" title="${image.alt}" target="_blank"
-                                                ><img src="${image.url}" alt="${image.alt}"
+                                            <a href="${image.url}" title="${image.alt}" target="_blank" class="imgLink">
+                                                <img src="${image.url}" alt="${image.alt}"
                                             /></a>
                                         `
                                     )}

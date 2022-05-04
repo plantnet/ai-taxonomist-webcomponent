@@ -39,6 +39,10 @@ export const identifyRequest = async (
             body: form,
         })
 
+        if (!response.ok) {
+            return `Error: ${response.statusText}`
+        }
+
         switch (backendFormat) {
             default:
             case BackendFormat.PLANTNET:

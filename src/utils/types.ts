@@ -57,8 +57,10 @@ export type ResultType = {
     author: string | null
     family: string | null
     commonNames: string[]
+    additionalText?: string
     images: ImageType[]
     gbifUrl: string | null
+    url?: string
     formatTaxonName: boolean
 }
 
@@ -93,8 +95,11 @@ export type IdentifyC4CErrorResponse = {
 // Carpeso backend formats
 export type CarpesoServerResult = {
     name: string
+    authorship: string | null
+    vernacularName: string
     score: number
     nutrition: number
+    url: string | null
     images: {
         url: string
     }[]
