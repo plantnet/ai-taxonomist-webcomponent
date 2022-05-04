@@ -94,6 +94,7 @@ export class TaxonResults extends LitElement {
 
         .result:hover {
             border-color: var(--ai-taxonomist-accent-color);
+            z-index: 10;
         }
 
         .result:nth-child(1) {
@@ -232,14 +233,28 @@ export class TaxonResults extends LitElement {
             margin-bottom: 6px;
         }
 
+        .imgLink {
+            display: flex;
+            z-index: 9;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            transform-origin: center;
+            border-radius: 4px;
+            margin-left: 12px;
+            overflow: hidden;
+        }
+        .imgLink:hover {
+            cursor: pointer;
+            transform: scale(3);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+
         .imgContainer img {
             object-position: center;
             object-fit: cover;
             aspect-ratio: 1;
             height: 100px;
             width: 100px;
-            marginleft: 12px;
-            border-radius: 4px;
             background: var(--ai-taxonomist-background);
             color: transparent;
         }
@@ -433,8 +448,8 @@ export class TaxonResults extends LitElement {
                                 <div class="col imgContainer">
                                     ${result.images.map(
                                         image => html`
-                                            <a href="${image.url}" title="${image.alt}" target="_blank"
-                                                ><img src="${image.url}" alt="${image.alt}"
+                                            <a href="${image.url}" title="${image.alt}" target="_blank" class="imgLink">
+                                                <img src="${image.url}" alt="${image.alt}"
                                             /></a>
                                         `
                                     )}

@@ -43,6 +43,14 @@ export class ImageSelected extends LitElement {
             overflow: hidden;
             margin-right: 6px;
             margin-bottom: 6px;
+            z-index: 10;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            transform-origin: top center;
+        }
+        .imgContainer:hover {
+            cursor: pointer;
+            transform: scale(3);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
         .imgContainer img {
             object-position: center;
@@ -120,7 +128,9 @@ export class ImageSelected extends LitElement {
                     ${this.images.map(
                         image => html`
                             <div class="imgContainer">
-                                <img width="400" src="${URL.createObjectURL(image)}" alt="" />
+                                <a href="${URL.createObjectURL(image)}" target="_blank">
+                                    <img width="400" src="${URL.createObjectURL(image)}" alt="" />
+                                </a>
                                 <button class="imgRemove" @click="${this.__onImageRemove(image)}">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
