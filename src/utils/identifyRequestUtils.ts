@@ -129,17 +129,19 @@ export const formatCarpersoResponse = async (response: Response, apiUrl: string)
         results: results.details.map((result: CarpesoServerResult) => ({
             score: result.score,
             taxonName: result.name,
-            author: null,
+            author: result.authorship,
             family: null,
             gbifUrl: null,
-            commonNames: [result.nutrition ? `Nutrition : ${result.nutrition} ufl/kg MS` : ''],
+            url: result.url ? result.url : undefined,
+            commonNames: [result.vernacularName],
+            additionalText: result.nutrition ? `Nutrition : ${result.nutrition} ufl/kg MS` : undefined,
             images: result.images
                 .map(image => ({
                     url: `${origin}/${image.url}`,
                     alt: `${result.name} ${origin}/${image.url}`,
                 }))
                 .slice(0, 3),
-            formatTaxonName: false,
+            formatTaxonName: true,
         })),
     }
 }
