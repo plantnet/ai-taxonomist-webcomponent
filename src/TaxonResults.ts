@@ -239,8 +239,9 @@ export class TaxonResults extends LitElement {
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
             transform-origin: center;
             border-radius: 4px;
-            margin-left: 12px;
             overflow: hidden;
+            height: 100px;
+            width: 100px;
         }
         .imgLink:hover {
             cursor: pointer;
@@ -253,8 +254,6 @@ export class TaxonResults extends LitElement {
             object-position: center;
             object-fit: cover;
             aspect-ratio: 1;
-            height: 100px;
-            width: 100px;
             background: var(--ai-taxonomist-background);
             color: transparent;
         }
