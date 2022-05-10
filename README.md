@@ -113,7 +113,7 @@ To automatically fix linting and formatting errors, run `npm run format`
     
 Update the version: 
 ```
-npm run major|minor|patch
+npm version major|minor|patch
 ```
 
 Publish the version pn NPM:
