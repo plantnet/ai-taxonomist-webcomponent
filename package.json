@@ -3,7 +3,7 @@
   "description": "Webcomponent ai-taxonomist following open-wc recommendations",
   "license": "MIT",
   "author": "ai-taxonomist",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "homepage": "https://github.com/plantnet/ai-taxonomist",
   "repository": "plantnet/ai-taxonomist",
   "main": "dist/src/index.js",
