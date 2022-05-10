@@ -45,12 +45,13 @@ export class ImageSelected extends LitElement {
             margin-bottom: 6px;
             z-index: 10;
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-            transform-origin: top center;
+            transform-origin: top right;
         }
         .imgContainer:hover {
             cursor: pointer;
             transform: scale(3);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            z-index: 11;
         }
         .imgContainer img {
             object-position: center;
