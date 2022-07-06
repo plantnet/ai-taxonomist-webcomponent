@@ -37,6 +37,10 @@
         // eslint-disable-next-line no-alert
         alert(`Attachments clicked: ${e.detail.taxonName}`)
     })
+    document.addEventListener('aiTaxonomistNewIdentification', () => {
+        // eslint-disable-next-line no-console
+        console.log("New identification")
+    })
 
     const apiUrl = 'http://localhost:3000/v2/identify/all'
     render(

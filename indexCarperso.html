@@ -61,11 +61,13 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JYSRPJM4V3"></script>
     <script>
+        /* eslint-disable */
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
       gtag('config', 'G-JYSRPJM4V3');
+      /* eslint-enable */
     </script>
 </head>
 <body>
@@ -81,6 +83,16 @@
             <a href="https://github.com/plantnet/ai-taxonomist-webcomponent" title="WebComponent GitHub" target="_blank">WebComponent repository</a>
     </div>
 
+    <script>
+        document.addEventListener('aiTaxonomistNewIdentification', () => {
+            /* eslint-disable */
+            gtag("event", "identify", {
+                event_category: "identification",
+                event_label: "identification"
+            });
+            /* eslint-enable */
+        })
+    </script>
     <script src="https://unpkg.com/ai-taxonomist/dist/src/index.js?module" type="module"></script>
     <ai-taxonomist apiUrl="https://c4c.inria.fr/carpeso/api/classify" backendFormat="carp" > <center>Chargement...</center></ai-taxonomist>
 </body>

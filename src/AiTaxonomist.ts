@@ -166,6 +166,14 @@ export class AiTaxonomist extends LitElement {
         this.identify.error = null
         this.identify.state = IdentifyState.Loading
 
+        this.dispatchEvent(
+            new CustomEvent('aiTaxonomistNewIdentification', {
+                bubbles: true,
+                composed: true,
+                cancelable: true,
+            })
+        )
+
         const response = await identifyRequest(this.imageFiles, this.apiUrl, this.apiKey, this.backendFormat)
 
         if (typeof response === 'string') {
