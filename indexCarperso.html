@@ -81,6 +81,15 @@
             <a href="https://github.com/plantnet/ai-taxonomist-webcomponent" title="WebComponent GitHub" target="_blank">WebComponent repository</a>
     </div>
 
+    <script>
+        document.addEventListener('aiTaxonomistNewIdentification', () => {
+            console.log("identify")
+            gtag("event", "identify", {
+                event_category: "identification",
+                event_label: "identification"
+            });
+        })
+    </script>
     <script src="https://unpkg.com/ai-taxonomist/dist/src/index.js?module" type="module"></script>
     <ai-taxonomist apiUrl="https://c4c.inria.fr/carpeso/api/classify" backendFormat="carp" > <center>Chargement...</center></ai-taxonomist>
 </body>
