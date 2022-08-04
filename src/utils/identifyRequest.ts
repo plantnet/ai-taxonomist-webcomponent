@@ -62,13 +62,13 @@ type StatusResponse = {
     gbif_doi: string
     queries: number
 }
-export const getGBIFDoi = async (backendFormat: BackendFormat): Promise<null | string> => {
+export const getGBIFDoi = async (apiUrl: string, backendFormat: BackendFormat): Promise<null | string> => {
     if (backendFormat !== BackendFormat.C4C) {
         return null
     }
 
     try {
-        const response = await fetch('https://c4c.inria.fr/ai-taxonomist/status')
+        const response = await fetch(apiUrl+'/status')
         if (response.status === 200) {
             const responseJson: StatusResponse = await response.json()
             return `https://doi.org/${responseJson.gbif_doi}`

@@ -37,7 +37,7 @@ export const formatC4CRequest = (images: File[], apiUrl: string, apiKey: string 
         form.append('image', images[i])
     }
 
-    const url = new URL(apiUrl)
+    const url = new URL(apiUrl+'/identify')
     url.searchParams.append('lang', getBrowserLang())
     if (apiKey && apiKey.length) {
         url.searchParams.append('api-key', apiKey)

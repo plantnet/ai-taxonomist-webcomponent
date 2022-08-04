@@ -129,7 +129,7 @@ export class AiTaxonomist extends LitElement {
             this.isPlantNetBranded = true
         }
         ;(async () => {
-            this.doiUrl = await getGBIFDoi(this.backendFormat)
+            this.doiUrl = await getGBIFDoi(this.apiUrl, this.backendFormat)
         })()
     }
 
