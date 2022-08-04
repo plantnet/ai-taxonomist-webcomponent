@@ -68,7 +68,7 @@ export const getGBIFDoi = async (apiUrl: string, backendFormat: BackendFormat): 
     }
 
     try {
-        const response = await fetch(apiUrl+'/status')
+        const response = await fetch(`${apiUrl}/status`)
         if (response.status === 200) {
             const responseJson: StatusResponse = await response.json()
             return `https://doi.org/${responseJson.gbif_doi}`
