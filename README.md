@@ -6,9 +6,11 @@
 <h3 align="center">
   <a href="https://plantnet.org/ai-taxonomist-demo/">Demo</a>
   <span> · </span>
-  <a href="https://cos4cloud-eosc.eu/services/ai-taxonomist/">Cos4Cloud</a>
+  <a href="https://github.com/plantnet/ai-taxonomist">AI Taxonomist Server</a>
   <span> · </span>
-  <a href="https://my.plantnet.org/">API</a>
+  <a href="https://my.plantnet.org/">Pl@ntNet API</a>
+  <span> · </span>
+  <a href="https://cos4cloud-eosc.eu/services/ai-taxonomist/">Cos4Cloud</a>
 </h3>
 
 ---
