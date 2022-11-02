@@ -25,8 +25,8 @@ export class AIFooter extends LitElement {
 
     @property({ type: Boolean }) displaySpecies: boolean = false
 
-    __displaySpeciesList() {
-        this.displaySpecies = true
+    __toggleSpeciesList() {
+        this.displaySpecies = !this.displaySpecies
     }
 
     render() {
@@ -35,10 +35,13 @@ export class AIFooter extends LitElement {
         }
 
         if (this.displaySpecies) {
-            return html`<species-list .apiUrl="${this.apiUrl}"></species-list>`
+            return html`
+                <a href="#" title="Close species list" @click="${this.__toggleSpeciesList}">Close species list</a>
+                <species-list .apiUrl="${this.apiUrl}"></species-list>
+            `
         }
 
-        return html`<a href="#" title="Open species list" @click="${this.__displaySpeciesList}">Species list</a
+        return html`<a href="#" title="Open species list" @click="${this.__toggleSpeciesList}">Species list</a
             ><a href="${this.doiUrl}" target="_blank" title="Open GBIF DOI"
                 >This identification engine has been trained on the GBIF Occurrence Download: ${this.doiUrl}</a
             >`
