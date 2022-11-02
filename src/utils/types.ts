@@ -114,3 +114,16 @@ export type IdentifyCarpesoSuccessResponse = {
 export type IdentifyCarpesoErrorResponse = {
     status: string
 }
+
+export type SpeciesRank = 'SPECIES'
+
+export type Species = {
+    name: string
+    species_id: string
+    rank: SpeciesRank
+    authorship: string
+    vernacularName: string
+    species: string
+    genus: string
+    family: string
+}

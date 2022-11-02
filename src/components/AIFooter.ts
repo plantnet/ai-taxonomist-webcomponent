@@ -1,5 +1,6 @@
 import { html, css, LitElement } from 'lit'
 import { property } from 'lit/decorators.js'
+import './species-list.js'
 
 export class AIFooter extends LitElement {
     static styles = css`
@@ -20,13 +21,26 @@ export class AIFooter extends LitElement {
 
     @property({ type: String }) doiUrl: string | null = null
 
+    @property({ type: String }) apiUrl: string | null = null
+
+    @property({ type: Boolean }) displaySpecies: boolean = false
+
+    __displaySpeciesList() {
+        this.displaySpecies = true
+    }
+
     render() {
         if (!this.doiUrl) {
             return null
         }
 
-        return html`<a href="${this.doiUrl}" target="_blank" tile="Open GBIF DOI"
-            >This identification engine has been trained on the GBIF Occurrence Download: ${this.doiUrl}</a
-        >`
+        if (this.displaySpecies) {
+            return html`<species-list .apiUrl="${this.apiUrl}"></species-list>`
+        }
+
+        return html`<a href="#" title="Open species list" @click="${this.__displaySpeciesList}">Species list</a
+            ><a href="${this.doiUrl}" target="_blank" title="Open GBIF DOI"
+                >This identification engine has been trained on the GBIF Occurrence Download: ${this.doiUrl}</a
+            >`
     }
 }
