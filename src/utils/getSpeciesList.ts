@@ -5,7 +5,7 @@ export const getSpeciesList = async (apiUrl: string): Promise<{ species: Species
     if (response.status === 200) {
         const speciesList: Species[] = await response.json()
         return {
-            species: speciesList,
+            species: speciesList.sort((a, b) => a.name.localeCompare(b.name)),
             error: null,
         }
     }

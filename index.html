@@ -42,7 +42,7 @@
         console.log("New identification")
     })
 
-    const apiUrl = 'http://localhost:3000/v2/identify/all'
+    const apiUrl = 'https://c4c.inria.fr/anura/api'
     render(
         html`
             <template id="aitaxonomist-attachments-template">
@@ -62,9 +62,7 @@
                 <button>SELECT SPECIES</button>
             </template>
 
-            <ai-taxonomist .apiUrl=${apiUrl} .allowPlantNetBranding=${true} class="prefer-light">
-            </ai-taxonomist>
-            <ai-taxonomist .apiUrl=${apiUrl} .allowPlantNetBranding=${true} class="prefer-dark">
+            <ai-taxonomist .apiUrl=${apiUrl} backendFormat="c4c" .allowPlantNetBranding=${true} class="prefer-light">
             </ai-taxonomist>
         `,
         document.querySelector('#demo')
