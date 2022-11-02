@@ -195,7 +195,7 @@ export class AiTaxonomist extends LitElement {
                         @imagepick=${this.__addImages}
                         ?plantnetBrand=${this.isPlantNetBranded}
                     ></image-picker>
-                    <ai-footer .doiUrl=${this.doiUrl}></ai-footer>
+                    <ai-footer .doiUrl=${this.doiUrl} .apiUrl=${this.apiUrl}></ai-footer>
                 `
             case IdentifyState.Loading:
             case IdentifyState.Error:
