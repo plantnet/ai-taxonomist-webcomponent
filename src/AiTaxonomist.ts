@@ -110,7 +110,7 @@ export class AiTaxonomist extends LitElement {
 
     @property({ type: Number }) maxImages: number = 5
 
-    @property({ type: Boolean }) allowPlantNetBranding: boolean = true
+    @property({ type: Boolean }) removePlantNetBranding: boolean = false
 
     @property({ type: Boolean }) isPlantNetBranded: boolean = false
 
@@ -123,7 +123,7 @@ export class AiTaxonomist extends LitElement {
     connectedCallback() {
         super.connectedCallback()
         if (
-            this.allowPlantNetBranding &&
+            !this.removePlantNetBranding &&
             (this.apiUrl.includes('https://my-api.plantnet.org') || this.apiUrl.includes('https://c4c.inria.fr'))
         ) {
             this.isPlantNetBranded = true
