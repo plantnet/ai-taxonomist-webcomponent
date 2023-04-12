@@ -28,7 +28,7 @@ This WebComponent follows the [open-wc](https://github.com/open-wc/open-wc) reco
   <img src="/demo.gif" alt="Demo of the Web Component" />
 </p>
 
-## Recommanded usage
+## Recommended usage
 
 1. Get an API Key for [Pl@ntNet here](https://my.plantnet.org/).
 2. Allow the domains on your Pl@ntNet account, for `http://localhost:8000` for local development or  `https://example.com` for production website [here](https://my.plantnet.org/account/settings).
@@ -65,7 +65,7 @@ You can also use your own server, for this you can specify the server endpoint l
     ```
 - **`backendFormat`**: (default: `pn`) backend format of the API: `pn` (PlantNet), `c4c` (Cos4Cloud) or `carp`  (CARPESO)
 - **`maxImages`**: The number of images the user can upload for a single identification, default to 5. 
-- **`allowPlantNetBranding`**: (default: true) if true, the component will display the PlantNet logo and the link to the PlantNet website. 
+- **`removePlantNetBranding`**: (default: false) if true, the component will not display the PlantNet logo and the link to the PlantNet website. 
 - **Attachments**: You can attach HTML elements to each result, for example if you want to let the user select the correct taxon. This can be achieve using an HTML `<template>` as follows: 
     ```html
      <template id="aitaxonomist-attachments-template">
