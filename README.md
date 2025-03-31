@@ -35,7 +35,7 @@ This WebComponent follows the [open-wc](https://github.com/open-wc/open-wc) reco
 3. There are several ways to use the web components: 
     1. Within a **web page in HTML** (example: a WordPress or a static website)
     ```html
-    <script src="https://unpkg.com/ai-taxonomist/dist/src/index.js?module" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ai-taxonomist/dist/src/+esm" type="module"></script>
     <ai-taxonomist apiKey="YOUR_API_KEY"></ai-taxonomist>
     ```
    2. Within a **JavaScript project (React, Vue, Svelte, Angular, etc)**: 
