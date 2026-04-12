@@ -136,8 +136,13 @@ export class AiTaxonomist extends LitElement {
     __addImages(e: ImagePickEvent) {
         const { files } = e.detail
         if (files) {
-            this.imageFiles = [...this.imageFiles, ...Array.from(files)].slice(0, this.maxImages)
-            this.runIdentify()
+            const newFiles = Array.from(files).filter(
+                file => !this.imageFiles.some(existing => existing.name === file.name && existing.size === file.size)
+            )
+            if (newFiles.length) {
+                this.imageFiles = [...this.imageFiles, ...newFiles].slice(0, this.maxImages)
+                this.runIdentify()
+            }
         }
     }
 
